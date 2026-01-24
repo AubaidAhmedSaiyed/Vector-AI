@@ -42,7 +42,7 @@ function InventoryPie({ stock }) {
 
   return (
     <>
-      <h3>📦 Stock Distribution</h3>
+
 
       {/* 🔥 HEIGHT CONTROL */}
       <div style={{ height: "260px" }}>

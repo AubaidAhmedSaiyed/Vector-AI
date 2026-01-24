@@ -1,9 +1,11 @@
-function Navbar() {
+const Navbar = () => {
   return (
     <div className="navbar">
-       🛍️ RetailVision
+      <div style={{ fontWeight: 700 }}>
+        🧿 RetailVision AI
+      </div>
     </div>
   );
-}
+};
 
 export default Navbar;

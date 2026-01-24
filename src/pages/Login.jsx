@@ -1,81 +1,83 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 import "../App.css";
-import { Link } from "react-router-dom";
-
 
 function Login() {
   const navigate = useNavigate();
 
+  // ✅ missing states (THIS WAS IMPORTANT)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // 🔵 Normal Email/Password Login (backend later)
-  const handleEmailLogin = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      alert("Please fill all fields");
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password.trim();
+
+    // 🔹 ADMIN LOGIN (demo)
+    if (cleanEmail === "admin@retail.com" && cleanPassword === "admin123") {
+      localStorage.setItem("role", "admin");
+      localStorage.setItem("token", "demo-admin-token");
+      navigate("/admin/Dashboard");
       return;
     }
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // 🔹 STAFF LOGIN (demo)
+    if (cleanEmail === "staff@retail.com" && cleanPassword === "staff123") {
+      localStorage.setItem("role", "staff");
+      localStorage.setItem("token", "demo-staff-token");
+      navigate("/staff/StaffDashboard");
+      return;
+    }
 
-    // 🔴 Abhi direct dashboard (backend baad me)
-    navigate("/dashboard");
+    alert("Invalid email or password");
   };
 
   return (
-    <div className="login-container ">
+    <>
+      <Navbar variant="minimal" />
 
-      <div className="login-card glass">
-        <h2>Welcome to RetailVision</h2>
-        {/* <p>Login to continue</p> */}
+      <div className="login-container">
+        <div className="login-card glass">
+          <h2>Login to RetailVision</h2>
 
+          {/* DEMO INFO */}
+          <p className="note" style={{ marginBottom: "12px" }}>
+            <strong>Demo Credentials:</strong><br />
+            Admin → admin@retail.com / admin123<br />
+            Staff → staff@retail.com / staff123
+          </p>
 
-        {/* 🔵 EMAIL / PASSWORD LOGIN */}
-        <form onSubmit={handleEmailLogin}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-          <button type="submit" className="login-btn">
-            Login
-          </button>
-        </form>
-    
-        {/* 🔵 GOOGLE LOGIN */}
-        <div className="google-login">
-          <GoogleLogin
-            onSuccess={(res) => {
-              console.log("Google Token:", res.credential);
-              navigate("/dashboard");
-            }}
-            onError={() => {
-              alert("Google Login Failed");
-            }}
-          />
+            <button type="submit" className="login-btn">
+              Login
+            </button>
+          </form>
+
+          <p className="note">
+            New user? <Link to="/signup">Create an account</Link>
+          </p>
         </div>
-
-      <div className="divider">OR</div>
-        <p className="note">
-          New user? <Link to="/Signup">Create an account</Link>
-        </p>
       </div>
-
-    </div>
+    </>
   );
 }
 

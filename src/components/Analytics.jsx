@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,34 +22,36 @@ ChartJS.register(
 );
 
 function Analytics({ stock }) {
+  const labels = stock.map(item => item.name);
+
   const data = {
-    labels: stock.map(item => item.name),
+    labels,
     datasets: [
       {
-        label: "Sales (₹)",
-        data: stock.map(item => item.soldToday * item.price),
-        backgroundColor: "#4f46e5",
+        label: "Sales (Units)",
+        data: stock.map(item => item.soldToday),
+        backgroundColor: "rgba(99,102,241,0.7)",
       },
       {
-        label: "Profit / Loss (₹)",
+        label: "Profit (₹)",
         data: stock.map(
-          item => item.soldToday * (item.price - item.cost)
+          item => (item.price - item.cost) * item.soldToday
         ),
-        borderColor: "#16a34a",
-        backgroundColor: "#16a34a",
-        type: "line",
+        backgroundColor: "rgba(16,185,129,0.7)",
       },
     ],
   };
 
-  return (
-    <>
-      <h3>📈 Sales & Profit</h3>
-      <div className="chart-box">
-        <Bar data={data} options={{ maintainAspectRatio: false }} />
-      </div>
-    </>
-  );
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+  };
+
+  return <Bar data={data} options={options} />;
 }
 
 export default Analytics;

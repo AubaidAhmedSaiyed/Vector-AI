@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import SalesForm from "../components/SalesForm";
-import StockTable from "../components/StockTable";
-import Alerts from "../components/Alerts";
-import Analytics from "../components/Analytics";
-import InventoryPie from "../components/InventoryPie";
+
+// ✅ FIXED IMPORT PATHS
+import SalesForm from "../../components/SalesForm";
+import StockTable from "../../components/StockTable";
+import Alerts from "../../components/Alerts";
+import Analytics from "../../components/Analytics";
+import InventoryPie from "../../components/InventoryPie";
 
 function Dashboard() {
   const [stock, setStock] = useState([
@@ -51,7 +53,7 @@ function Dashboard() {
         <StockTable stock={stock} />
       </div>
 
-      {/* 📊 ANALYTICS SECTION (SIDE BY SIDE GRAPHS) */}
+      {/* 📊 ANALYTICS SECTION */}
       <div className="analytics-row">
         <div className="card chart-box">
           <Analytics stock={stock} />
