@@ -513,4 +513,85 @@ table tr:last-child td:last-child {
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
+/* ================= CSV UPLOAD ================= */
+
+.csv-upload-box {
+  display: block;
+  border: 2px dashed rgba(43,176,163,0.4);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  background: linear-gradient(
+    180deg,
+    rgba(43,176,163,0.06),
+    rgba(43,176,163,0.02)
+  );
+}
+
+.csv-upload-box:hover {
+  border-color: var(--accent);
+  background: linear-gradient(
+    180deg,
+    rgba(43,176,163,0.12),
+    rgba(43,176,163,0.05)
+  );
+}
+
+.csv-upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.csv-icon {
+  font-size: 36px;
+}
+
+.csv-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+/* ================= SALES SUGGESTIONS ================= */
+
+.suggestion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.suggestion-item {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(43, 176, 163, 0.25);
+}
+
+.suggestion-title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.suggestion-text {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.suggestion-text span {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.suggestion-offer {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #a7f3d0; /* soft green */
+}
 

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-// ✅ FIXED IMPORT PATHS
+// Components
 import SalesForm from "../../components/SalesForm";
 import StockTable from "../../components/StockTable";
 import Alerts from "../../components/Alerts";
 import Analytics from "../../components/Analytics";
 import InventoryPie from "../../components/InventoryPie";
+import DashboardNavbar from "../../components/DashboardNavbar";
+
+import "../../App.css";
+
+// ✅ API
+import { getSalesSuggestions } from "../../Api/Api";
 
 function Dashboard() {
   const [stock, setStock] = useState([
@@ -27,7 +33,10 @@ function Dashboard() {
     },
   ]);
 
-  // Add sale logic
+  // 🔥 suggestions state
+  const [suggestions, setSuggestions] = useState([]);
+
+  /* ================= SALES ================= */
   const addSale = (itemName, soldQty) => {
     const updatedStock = stock.map((item) =>
       item.name === itemName
@@ -41,34 +50,71 @@ function Dashboard() {
     setStock(updatedStock);
   };
 
+  /* ================= LOAD SUGGESTIONS ================= */
+  useEffect(() => {
+    const loadSuggestions = async () => {
+      const data = await getSalesSuggestions();
+      setSuggestions(data);
+    };
+
+    loadSuggestions();
+  }, []);
+
   return (
-    <div className="container">
-      {/* Sales Form */}
-      <div className="card">
-        <SalesForm addSale={addSale} />
-      </div>
+    <>
+      <DashboardNavbar />
 
-      {/* Stock Table */}
-      <div className="card">
-        <StockTable stock={stock} />
-      </div>
-
-      {/* 📊 ANALYTICS SECTION */}
-      <div className="analytics-row">
-        <div className="card chart-box">
-          <Analytics stock={stock} />
+      <div className="container">
+        {/* SALES FORM */}
+        <div className="card">
+          <SalesForm addSale={addSale} />
         </div>
 
-        <div className="card chart-box">
-          <InventoryPie stock={stock} />
+        {/* STOCK TABLE */}
+        <div className="card">
+          <StockTable stock={stock} />
+        </div>
+
+        {/* ANALYTICS */}
+        <div className="analytics-row">
+          <div className="card chart-box">
+            <Analytics stock={stock} />
+          </div>
+
+          <div className="card chart-box">
+            <InventoryPie stock={stock} />
+          </div>
+        </div>
+
+        {/* 🔥 SALES SUGGESTIONS */}
+        <div className="card">
+          <h3>💡 Sales Suggestions</h3>
+
+          <div className="suggestion-list">
+            {suggestions.map((s, i) => (
+              <div className="suggestion-item" key={i}>
+                <h4 className="suggestion-title">{s.product}</h4>
+
+                <p className="suggestion-text">
+                  <span>Pair with:</span> {s.pairWith.join(", ")}
+                </p>
+
+                <p className="suggestion-offer">🎯 {s.offer}</p>
+              </div>
+            ))}
+
+            {suggestions.length === 0 && (
+              <p className="note">No suggestions available</p>
+            )}
+          </div>
+        </div>
+
+        {/* ALERTS */}
+        <div className="card">
+          <Alerts stock={stock} />
         </div>
       </div>
-
-      {/* Alerts */}
-      <div className="card">
-        <Alerts stock={stock} />
-      </div>
-    </div>
+    </>
   );
 }
 

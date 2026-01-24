@@ -1,38 +1,40 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
 import Navbar from "../components/Navbar";
 import "../App.css";
+
+// ✅ API IMPORT
+import { loginUser } from "../Api/Api";
 
 function Login() {
   const navigate = useNavigate();
 
-  // ✅ missing states (THIS WAS IMPORTANT)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanPassword = password.trim();
+    try {
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanPassword = password.trim();
 
-    // 🔹 ADMIN LOGIN (demo)
-    if (cleanEmail === "admin@retail.com" && cleanPassword === "admin123") {
-      localStorage.setItem("role", "admin");
-      localStorage.setItem("token", "demo-admin-token");
-      navigate("/admin/Dashboard");
-      return;
+      // ✅ API CALL (mock for now)
+      const res = await loginUser(cleanEmail, cleanPassword);
+
+      localStorage.setItem("role", res.role);
+      localStorage.setItem("token", res.token);
+
+      // ✅ ROLE-BASED REDIRECT
+      navigate(`/${res.role}/dashboard`);
+    } catch (err) {
+      alert("Invalid email or password");
+    } finally {
+      setLoading(false);
     }
-
-    // 🔹 STAFF LOGIN (demo)
-    if (cleanEmail === "staff@retail.com" && cleanPassword === "staff123") {
-      localStorage.setItem("role", "staff");
-      localStorage.setItem("token", "demo-staff-token");
-      navigate("/staff/StaffDashboard");
-      return;
-    }
-
-    alert("Invalid email or password");
   };
 
   return (
@@ -50,6 +52,7 @@ function Login() {
             Staff → staff@retail.com / staff123
           </p>
 
+          {/* EMAIL / PASSWORD LOGIN */}
           <form onSubmit={handleLogin}>
             <input
               type="email"
@@ -67,10 +70,27 @@ function Login() {
               required
             />
 
-            <button type="submit" className="login-btn">
-              Login
+            <button type="submit" className="login-btn" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
+
+          <div className="divider">OR</div>
+
+          {/* 🔵 GOOGLE LOGIN */}
+          <div className="google-login">
+            <GoogleLogin
+              onSuccess={(res) => {
+                // demo assumption: google → staff
+                localStorage.setItem("role", "staff");
+                localStorage.setItem("token", res.credential);
+                navigate("/staff/dashboard");
+              }}
+              onError={() => {
+                alert("Google Login Failed");
+              }}
+            />
+          </div>
 
           <p className="note">
             New user? <Link to="/signup">Create an account</Link>

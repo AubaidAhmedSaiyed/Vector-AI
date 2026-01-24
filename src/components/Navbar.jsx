@@ -2,7 +2,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div style={{ fontWeight: 700 }}>
-        🧿 RetailVision AI
+        🧿 RetailVision 
       </div>
     </div>
   );

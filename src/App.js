@@ -7,11 +7,10 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-// Dashboards
 import AdminDashboard from "./pages/admin/Dashboard";
-
-// (abhi staff dashboard nahi hai to temporary same use kar lo)
+import AdminStockManagement from "./pages/admin/StockManagment";
 import StaffDashboard from "./pages/staff/StaffDashboard";
+import StaffStockManagement from "./pages/staff/StaffStockManagment";
 
 function App() {
   return (
@@ -22,9 +21,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* Role-based routes */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/stock" element={<AdminStockManagement />} />
+
           <Route path="/staff/dashboard" element={<StaffDashboard />} />
+          <Route path="/staff/stock" element={<StaffStockManagement />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider>
