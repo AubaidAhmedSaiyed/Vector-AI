@@ -32,7 +32,7 @@ function Landing() {
         <div className="flickr-content">
           {/* Rocket badge animation */}
           <span className="hero-badge animate-badge">
-            🚀 AI-powered Retail Intelligence
+             AI-powered Retail Intelligence
           </span>
 
           {/* Typing title */}
@@ -47,7 +47,7 @@ function Landing() {
 
           <p className="flickr-support">
             RetailVision is an AI-driven retail management platform built for
-            small and medium businesses. It automates billing, optimizes
+            businesses. It automates billing, optimizes
             inventory, and delivers real-time insights to help retailers run
             smarter, faster operations.
           </p>
@@ -119,37 +119,37 @@ function Landing() {
           </div>
         </div>
       </section>
+{/* ================= WHY RETAILVISION ================= */}
+<section className="section alt-section">
+  <h2 className="section-title">Why RetailVision?</h2>
 
-      {/* ================= WHY RETAILVISION ================= */}
-      <section className="section alt-section">
-        <h2 className="section-title">Why RetailVision?</h2>
+  <div className="why-grid">
+    <div className="why-card">
+      <h3>Built for Indian Retail</h3>
+      <p>
+        Designed specifically for retailers with
+        real-world workflows and practical use cases.
+      </p>
+    </div>
 
-        <div className="why-grid">
-          <div className="why-item">
-            <h3>Built for Indian Retail</h3>
-            <p>
-              Designed specifically for small and medium retailers with
-              real-world workflows and practical use cases.
-            </p>
-          </div>
+    <div className="why-card">
+      <h3>AI-Driven Insights</h3>
+      <p>
+        Make smarter decisions using AI-powered forecasting and
+        analytics - not guesswork.
+      </p>
+    </div>
 
-          <div className="why-item">
-            <h3>AI-Driven Insights</h3>
-            <p>
-              Make smarter decisions using AI-powered forecasting and analytics,
-              not guesswork.
-            </p>
-          </div>
+    <div className="why-card">
+      <h3>Simple, Scalable & Secure</h3>
+      <p>
+        Easy to start, quick to adopt, and scalable as your business
+        grows.
+      </p>
+    </div>
+  </div>
+</section>
 
-          <div className="why-item">
-            <h3>Simple, Scalable & Secure</h3>
-            <p>
-              Easy to start, quick to adopt, and scalable as your business
-              grows.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* ================= USERS ================= */}
       <section className="section">
@@ -191,7 +191,7 @@ function Landing() {
             <h3>What We Do</h3>
             <p>
               RetailVision provides an AI-driven retail management platform that
-              helps small and medium businesses automate billing, manage
+              helps  businesses automate billing, manage
               inventory, and gain real-time insights.
             </p>
           </div>
@@ -207,7 +207,7 @@ function Landing() {
           <div className="info-card">
             <h3>Our Vision</h3>
             <p>
-              Empower small retailers with enterprise-level tools to compete
+              Empower retailers with enterprise-level tools to compete
               confidently in a digital-first retail ecosystem.
             </p>
           </div>

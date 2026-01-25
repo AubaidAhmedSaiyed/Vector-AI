@@ -18,8 +18,8 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   background:
-    radial-gradient(700px circle at 50% 20%, rgba(116,98,252,0.22), transparent 55%),
-    radial-gradient(800px circle at 80% 80%, rgba(91,75,255,0.18), transparent 60%),
+    radial-gradient(700px circle at 50% 20%, rgba(46,196,182,0.12), transparent 55%),
+    radial-gradient(800px circle at 80% 80%,  rgba(46,196,182,0.06), transparent 60%),
     var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
@@ -185,11 +185,11 @@ body {
 
 /* Login button */
 .login-btn {
-  width: 100%;
+  width: 450px;
   height: 50px;
   border-radius: 14px;
 
-  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  background: linear-gradient(50deg, var(--accent), var(--accent-strong));
   color: white;
   font-weight: 600;
 
@@ -591,16 +591,20 @@ table tr:last-child td:last-child {
   position: absolute;
   inset: 0;
   pointer-events: none;
-
-  background:
-    radial-gradient(
-      600px circle at 50% 30%,
+background:
+    linear-gradient(
+      to bottom,
       rgba(43,176,163,0.12),
-      transparent 65%
+      transparent 45%
+    ),
+    linear-gradient(
+      to top,
+      rgba(2,6,23,0.85),
+      transparent 55%
     );
 }
 /* ======================================================
-   LANDING PAGE – INDUSTRY GRADE SAAS STYLE
+   LANDING PAGE – INDUSTRY GRADE SAAS STYLE (FIXED)
    ====================================================== */
 
 /* ================= ROOT ================= */
@@ -618,7 +622,7 @@ table tr:last-child td:last-child {
    ====================================================== */
 
 .flickr-landing {
-  min-height: 92vh; /* tighter than full screen */
+  min-height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -626,16 +630,23 @@ table tr:last-child td:last-child {
   padding: 40px 0;
 }
 
+/* EDGE-FADE GLOW (NO CIRCLE) */
 .flickr-landing::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    700px circle at 50% 25%,
-    rgba(43,176,163,0.18),
-    transparent 65%
-  );
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(43,176,163,0.14),
+      transparent 35%
+    ),
+    linear-gradient(
+      to top,
+      rgba(2,6,23,0.9),
+      transparent 45%
+    );
 }
 
 .flickr-content {
@@ -646,7 +657,7 @@ table tr:last-child td:last-child {
   margin: 0 auto;
 }
 
-/* Badge */
+/* Badge (NO EMOJI) */
 .hero-badge {
   display: inline-block;
   padding: 8px 18px;
@@ -761,7 +772,7 @@ table tr:last-child td:last-child {
 }
 
 /* ======================================================
-   SECTIONS (FEATURES / USERS / ABOUT / WHY)
+   SECTIONS
    ====================================================== */
 
 .section {
@@ -777,7 +788,6 @@ table tr:last-child td:last-child {
   padding: 0 24px;
 }
 
-/* Section divider */
 .section::before {
   content: "";
   width: 90px;
@@ -797,7 +807,6 @@ table tr:last-child td:last-child {
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Titles & text */
 .section-title {
   font-size: 2.2rem;
   font-weight: 700;
@@ -817,7 +826,7 @@ table tr:last-child td:last-child {
 }
 
 /* ======================================================
-   CARDS
+   CARDS (BASE)
    ====================================================== */
 
 .card-grid {
@@ -838,27 +847,8 @@ table tr:last-child td:last-child {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.info-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    360px circle at top left,
-    rgba(46,196,182,0.18),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.info-card:hover::after {
-  opacity: 1;
-}
-
 .info-card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+  transform: translateY(-10px);
 }
 
 .info-card h3 {
@@ -874,42 +864,137 @@ table tr:last-child td:last-child {
 }
 
 /* ======================================================
-   WHY RETAILVISION
+   VISUAL VARIATION PER SECTION (POLISHED)
    ====================================================== */
+
+/* ================= FEATURES – premium glass ================= */
+
+.section:first-of-type .info-card {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.085),
+    rgba(255,255,255,0.035)
+  );
+  border: 1px solid rgba(94,234,212,0.28);
+}
+
+.section:first-of-type .info-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    rgba(94,234,212,0.14),
+    transparent 45%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+/* ================= WHY RETAILVISION ================= */
 
 .why-grid {
   margin-top: 48px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 36px;
+  gap: 32px;
 }
 
-.why-item {
-  padding: 28px;
-  border-left: 4px solid #2ec4b6;
-  background: rgba(255,255,255,0.04);
-  border-radius: 18px;
+.why-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(14px);
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
-.why-item h3 {
+.why-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    #5eead4,
+    transparent
+  );
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 34px 70px rgba(0, 0, 0, 0.8);
+}
+
+.why-card h3 {
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+  font-weight: 600;
   color: #5eead4;
-  margin-bottom: 8px;
 }
 
-.why-item p {
-  color: #cbd5f5;
+.why-card p {
   font-size: 0.95rem;
+  line-height: 1.6;
+  color: #cbd5f5;
 }
+
+
+/* ================= USERS – clean & calm ================= */
+
+.section:not(.alt-section) .info-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none;
+}
+
+.section:not(.alt-section) .info-card:hover {
+  transform: translateY(-4px);
+}
+
+
+/* ================= ABOUT – strong identity ================= */
+
+.section.alt-section:last-of-type .info-card {
+  position: relative;
+  background: rgba(94,234,212,0.06);
+  border: 1px solid rgba(94,234,212,0.35);
+}
+
+.section.alt-section:last-of-type .info-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at top,
+    rgba(94,234,212,0.25),
+    transparent 60%
+  );
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 
 /* ======================================================
-   CONTACT
+   CONTACT – EDGE FADE CTA
    ====================================================== */
 
 .contact-highlight {
-  background: radial-gradient(
-    700px circle at center,
-    rgba(46,196,182,0.22),
-    transparent 70%
+
+     background: radial-gradient(
+    520px circle at center,
+    rgba(46,196,182,0.12),
+    rgba(46,196,182,0.06) 35%,
+    transparent 95%
   );
 }
 
@@ -918,6 +1003,19 @@ table tr:last-child td:last-child {
   margin: 42px auto 0;
   display: grid;
   gap: 18px;
+  position: relative;
+}
+
+.contact-form::after {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(
+    420px circle at center,
+    rgba(94,234,212,0.08),
+    transparent 70%
+  );
+  z-index: -1;
 }
 
 .contact-form input,
@@ -932,13 +1030,6 @@ table tr:last-child td:last-child {
 .contact-form textarea {
   min-height: 140px;
   resize: none;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: #5eead4;
-  box-shadow: 0 0 0 4px rgba(94,234,212,0.25);
 }
 
 .contact-form button {
@@ -985,6 +1076,7 @@ table tr:last-child td:last-child {
     flex-direction: column;
   }
 }
+
 /* ================= BRAND TYPING ANIMATION ================= */
 
 .typing-brand {
