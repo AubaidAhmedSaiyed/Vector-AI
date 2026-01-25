@@ -6,64 +6,85 @@ function Landing() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // prevent scroll ONLY on landing
     document.body.style.overflow = "hidden";
-
-    return () => {
-      // IMPORTANT: restore scroll for other pages
-      document.body.style.overflow = "auto";
-    };
+    return () => (document.body.style.overflow = "auto");
   }, []);
 
   const handleContinue = () => {
-    localStorage.removeItem("role"); // safer than forcing admin
+    localStorage.removeItem("role");
     navigate("/login");
   };
 
-return (
-  <div className="landing-page">
+  return (
+    <div className="landing-page">
+      <Navbar />
 
+      {/* HERO SECTION */}
+      <section className="flickr-landing">
+        <div className="flickr-content">
 
-    <section className="flickr-landing">
-      <div className="flickr-overlay"></div>
+          {/* BADGE */}
+          <span className="hero-badge">
+            🚀 AI-powered Retail Intelligence
+          </span>
 
-      <div className="flickr-content">
-        <h1 className="flickr-title animate-title">
-          Welcome <span className="heading">RetailVision</span>
-        </h1>
-    
+          {/* TITLE */}
+          <h1 className="flickr-title">
+            Smarter Retail Starts with{" "}
+            <span className="heading">RetailVision</span>
+          </h1>
 
-        <p className="flickr-tagline animate-tagline">
-          Smarter inventory. Clearer decisions.
-        </p>
+          {/* SUBTITLE */}
+          <p className="hero-subtitle">
+            Predict demand. Reduce waste. Make confident decisions.
+          </p>
 
-        <p className="flickr-support animate-support heading">
-          AI-powered demand forecasting, inventory optimization,
-          and actionable insights for modern retail teams.
-        </p>
-      
+          {/* DESCRIPTION */}
+          <p className="flickr-support">
+            RetailVision helps retailers forecast demand, optimize inventory,
+            and unlock actionable insights — all from a single intelligent
+            AI-powered dashboard.
+          </p>
 
-        <button
-          className="flickr-cta-group animate-cta"
-          onClick={handleContinue}
-        >
-          Continue to Login
-        </button>
+          {/* CTA GROUP */}
+          <div className="landing-cta">
+            <button className="cta-primary" onClick={handleContinue}>
+              Get Started Free
+            </button>
 
-        <button
-          className="flickr-cta-group animate-cta"
-          onClick={() => navigate("signup")}
-        >
-          Create an Account
-        </button>
-        
-      </div>
-    </section>
-    <footer className="footer">© 2026 RetailVision • Privacy • Terms
-</footer>
-  </div>
-);
+            <button
+              className="cta-secondary"
+              onClick={() => navigate("/signup")}
+            >
+              View Demo
+            </button>
+          </div>
 
+          {/* TRUST STRIP */}
+          <div className="hero-trust">
+            <div className="trust-card">
+              <strong>30%</strong>
+              <span>Less Stock Waste</span>
+            </div>
+            <div className="trust-card">
+              <strong>2×</strong>
+              <span>Faster Decisions</span>
+            </div>
+            <div className="trust-card">
+              <strong>AI</strong>
+              <span>Smart Sales Insights</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        © 2026 RetailVision • Built for Innovation
+      </footer>
+    </div>
+  );
 }
 
 export default Landing;

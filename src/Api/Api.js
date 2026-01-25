@@ -7,23 +7,17 @@ const BASE_URL = "http://localhost:5000/api"; // future use
 
 // Demo login (email/password)
 export const loginUser = async (email, password) => {
-  // 🔴 MOCK RESPONSE
   if (email === "admin@retail.com" && password === "admin123") {
-    return {
-      role: "admin",
-      token: "demo-admin-token",
-    };
+    return { role: "admin", token: "demo-admin-token" };
   }
 
   if (email === "staff@retail.com" && password === "staff123") {
-    return {
-      role: "staff",
-      token: "demo-staff-token",
-    };
+    return { role: "staff", token: "demo-staff-token" };
   }
 
   throw new Error("Invalid credentials");
 };
+
 
 /* ================= STOCK ================= */
 

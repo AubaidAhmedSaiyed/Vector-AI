@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import Navbar from "../components/Navbar";
@@ -14,6 +14,12 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // ✅ CLEAR OLD SESSION ON PAGE LOAD (CORRECT USE OF useEffect)
+  useEffect(() => {
+    localStorage.removeItem("role");
+    localStorage.removeItem("token");
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -22,14 +28,16 @@ function Login() {
       const cleanEmail = email.trim().toLowerCase();
       const cleanPassword = password.trim();
 
-      // ✅ API CALL (mock for now)
+      // ✅ API CALL
       const res = await loginUser(cleanEmail, cleanPassword);
 
-      localStorage.setItem("role", res.role);
+      const role = res.role.toLowerCase().trim();
+
+      localStorage.setItem("role", role);
       localStorage.setItem("token", res.token);
 
       // ✅ ROLE-BASED REDIRECT
-      navigate(`/${res.role}/dashboard`);
+      navigate(`/${role}/dashboard`);
     } catch (err) {
       alert("Invalid email or password");
     } finally {
@@ -45,14 +53,12 @@ function Login() {
         <div className="login-card glass">
           <h2>Login to RetailVision</h2>
 
-          {/* DEMO INFO */}
           <p className="note" style={{ marginBottom: "12px" }}>
             <strong>Demo Credentials:</strong><br />
             Admin → admin@retail.com / admin123<br />
             Staff → staff@retail.com / staff123
           </p>
 
-          {/* EMAIL / PASSWORD LOGIN */}
           <form onSubmit={handleLogin}>
             <input
               type="email"
@@ -77,11 +83,9 @@ function Login() {
 
           <div className="divider">OR</div>
 
-          {/* 🔵 GOOGLE LOGIN */}
           <div className="google-login">
             <GoogleLogin
               onSuccess={(res) => {
-                // demo assumption: google → staff
                 localStorage.setItem("role", "staff");
                 localStorage.setItem("token", res.credential);
                 navigate("/staff/dashboard");
