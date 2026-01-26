@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import { BRAND_NAME } from "../config/brand";
+import logo from "../assets/logo.png";
 
 function DashboardNavbar() {
   const navigate = useNavigate();
@@ -25,7 +27,15 @@ function DashboardNavbar() {
           <button className="hamburger" onClick={() => setOpen(!open)}>
             ☰
           </button>
-          <span className="brand">RetailVision</span>
+
+          <div className="brand">
+            <img
+              src={logo}
+              alt="Vector AI Logo"
+              className="brand-logo"
+            />
+            <span>{BRAND_NAME}</span>
+          </div>
         </div>
 
         <button className="logout-btn" onClick={handleLogout}>

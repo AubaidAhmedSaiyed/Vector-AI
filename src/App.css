@@ -1549,3 +1549,19 @@ background:
 .logout-btn {
   display: block;
 }
+/* logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.brand-logo {
+  height: 28px;   /* perfect for navbar */
+  width: auto;
+}
+.brand span {
+  letter-spacing: 0.3px;
+}
+

@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Analytics from "../components/Analytics";
+import {
+  BRAND_NAME,
+  TAGLINE,
+  BRAND_DESCRIPTION,
+  COPYRIGHT_TEXT,
+} from "../config/brand";
+
 function Landing() {
   const navigate = useNavigate();
+  const fullText = BRAND_NAME;
 
   /* ===== TYPING LOGIC ===== */
-  const fullText = "RetailVision";
   const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = "auto";
 
-    let index = 0; // ✅ yahi missing tha
+    let index = 0;
 
     const interval = setInterval(() => {
       setTypedText(fullText.slice(0, index + 1));
@@ -25,36 +33,51 @@ function Landing() {
     return () => clearInterval(interval);
   }, []);
 
+  /* ===== DEMO STOCK FOR GRAPH ===== */
+  const demoStock = [
+    {
+      name: "Men Shirt",
+      quantity: 48,
+      soldToday: 12,
+      price: 599,
+      cost: 420,
+    },
+    {
+      name: "Chino Pants",
+      quantity: 32,
+      soldToday: 8,
+      price: 799,
+      cost: 560,
+    },
+  ];
+
   return (
     <div className="landing-page">
       <Navbar />
+
       {/* ================= HERO ================= */}
       <section className="flickr-landing">
         <div className="flickr-content">
-          {/* Rocket badge animation */}
-          <span className="hero-badge animate-badge">
-            AI-powered Retail Intelligence
-          </span>
+          <span className="hero-badge animate-badge">{TAGLINE}</span>
 
-          {/* Typing title */}
           <h1 className="flickr-title">
             Smarter Retail Starts with{" "}
             <span className="heading typing-text">{typedText}</span>
           </h1>
 
           <p className="hero-subtitle">
-            Predict demand. Reduce waste. Make confident decisions.
+            Predict demand. Reduce waste. Act on data with confidence.
           </p>
 
           <p className="flickr-support">
-            RetailVision is an AI-driven retail management platform built for
-            businesses. It automates billing, optimizes inventory, and delivers
-            real-time insights to help retailers run smarter, faster operations.
+            Vector AI is an AI-driven retail management platform that
+            optimizes inventory, and delivers real-time insights to
+            help retailers run smarter operations.
           </p>
 
           <div className="landing-cta">
             <button className="cta-primary" onClick={() => navigate("/login")}>
-              Sign In
+              Sign In 
             </button>
             <button
               className="cta-secondary"
@@ -126,11 +149,11 @@ function Landing() {
           {/* LEFT */}
           <div className="showcase-left">
             <h2 className="section-title">
-              How RetailVision Helps Retailers Make Smarter Decisions
+              How Vector AI Helps Retailers Make Smarter Decisions
             </h2>
 
             <p className="showcase-text">
-              RetailVision analyzes your store’s sales and inventory data to
+              Vector AI analyzes your store’s sales and inventory data to
               highlight slow-moving products and suggest practical actions that
               improve profitability — without changing your existing workflow.
             </p>
@@ -156,9 +179,12 @@ function Landing() {
           {/* RIGHT – DASHBOARD PREVIEW */}
           <div className="showcase-right">
             <div className="dashboard-card">
-              <h4 className="dashboard-title">
-                RetailVision – Feature Preview
-              </h4>
+              {/* ✅ SAME DASHBOARD GRAPH */}
+              <div className="chart-box landing-chart">
+                <Analytics stock={demoStock} />
+              </div>
+
+              <h4 className="dashboard-title">Vector AI – Feature Preview</h4>
 
               <div className="bundle-item">
                 <span>Men’s Cotton Shirt (Blue)</span>
@@ -184,6 +210,7 @@ function Landing() {
                 <button className="approve-btn">Apply in Dashboard</button>
                 <button className="ghost-btn">Review Logic</button>
               </div>
+
               <p className="demo-note">
                 Feature preview shown for demonstration purposes.
               </p>
@@ -194,7 +221,7 @@ function Landing() {
 
       {/* ================= WHY RETAILVISION ================= */}
       <section className="section alt-section">
-        <h2 className="section-title">Why RetailVision?</h2>
+        <h2 className="section-title">Why Vector AI?</h2>
 
         <div className="why-grid">
           <div className="why-card">
@@ -225,7 +252,7 @@ function Landing() {
 
       {/* ================= USERS ================= */}
       <section className="section">
-        <h2 className="section-title">Who Is RetailVision For?</h2>
+        <h2 className="section-title">Who Is Vector AI For?</h2>
 
         <div className="card-grid">
           <div className="info-card">
@@ -251,6 +278,7 @@ function Landing() {
               optimize operations.
             </p>
           </div>
+
           <div className="info-card">
             <h3>Business Owners</h3>
             <p>
@@ -263,16 +291,12 @@ function Landing() {
 
       {/* ================= ABOUT ================= */}
       <section className="section alt-section">
-        <h2 className="section-title">About RetailVision</h2>
+        <h2 className="section-title">About Vector AI</h2>
 
         <div className="card-grid">
           <div className="info-card">
             <h3>What We Do</h3>
-            <p>
-              RetailVision provides an AI-driven retail management platform that
-              helps businesses automate billing, manage inventory, and gain
-              real-time insights.
-            </p>
+            <p>{BRAND_DESCRIPTION}</p>
           </div>
 
           <div className="info-card">
@@ -290,11 +314,12 @@ function Landing() {
               confidently in a digital-first retail ecosystem.
             </p>
           </div>
+
           <div className="info-card">
             <h3>How It Works</h3>
             <p>
-              RetailVision connects sales and inventory data to generate
-              insights, forecasts, and recommendations — all in real time.
+              Vector AI connects sales and inventory data to generate insights,
+              forecasts, and recommendations — all in real time.
             </p>
           </div>
         </div>
@@ -319,7 +344,7 @@ function Landing() {
 
       {/* ================= FOOTER ================= */}
       <footer className="footer">
-        © 2026 RetailVision • Built for Innovation
+        © 2026 Vector AI • Built for Innovation
       </footer>
     </div>
   );

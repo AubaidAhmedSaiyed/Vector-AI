@@ -13,25 +13,28 @@ import "../../App.css";
 // ✅ API
 import { getSalesSuggestions } from "../../Api/Api";
 
+/* 🔹 EXPORTABLE DEMO STOCK (Landing / Showcase use) */
+export const demoStockData = [
+  {
+    name: "Milk",
+    quantity: 20,
+    soldToday: 0,
+    price: 30,
+    cost: 25,
+    expiry: "2026-01-10",
+  },
+  {
+    name: "Maggi",
+    quantity: 40,
+    soldToday: 0,
+    price: 15,
+    cost: 10,
+    expiry: "2026-03-01",
+  },
+];
+
 function Dashboard() {
-  const [stock, setStock] = useState([
-    {
-      name: "Milk",
-      quantity: 20,
-      soldToday: 0,
-      price: 30,
-      cost: 25,
-      expiry: "2026-01-10",
-    },
-    {
-      name: "Maggi",
-      quantity: 40,
-      soldToday: 0,
-      price: 15,
-      cost: 10,
-      expiry: "2026-03-01",
-    },
-  ]);
+  const [stock, setStock] = useState(demoStockData);
 
   // 🔥 suggestions state
   const [suggestions, setSuggestions] = useState([]);

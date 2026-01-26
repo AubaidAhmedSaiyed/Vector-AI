@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { BRAND_NAME } from "../config/brand";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -7,7 +9,7 @@ const Navbar = () => {
     <div
       className="navbar"
       style={{
-        position: "sticky",   
+        position: "sticky",
         width: "100%",
         zIndex: 10,
 
@@ -20,9 +22,28 @@ const Navbar = () => {
         boxSizing: "border-box",
       }}
     >
-      {/* Logo */}
-      <div style={{ fontWeight: 700, fontSize: "18px", color: "#fff" }}>
-        🧿 RetailVision
+      {/* Logo + Brand */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          fontWeight: 700,
+          fontSize: "18px",
+          color: "#fff",
+          cursor: "pointer",
+        }}
+        onClick={() => navigate("/")}
+      >
+        <img
+          src={logo}
+          alt="Vector AI Logo"
+          style={{
+            height: "28px",
+            width: "auto",
+          }}
+        />
+        <span>{BRAND_NAME}</span>
       </div>
 
       {/* Buttons */}
