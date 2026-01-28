@@ -6,10 +6,15 @@ import {
   BRAND_NAME,
   TAGLINE,
   BRAND_DESCRIPTION,
-  COPYRIGHT_TEXT,
 } from "../config/brand";
+import {
+  TrendingUp,
+  Boxes,
+  BarChart3,
+  LayoutDashboard,
+} from "lucide-react";
 
-function Landing() {
+function Landing({ toggleTheme, theme }) {
   const navigate = useNavigate();
   const fullText = BRAND_NAME;
 
@@ -17,67 +22,47 @@ function Landing() {
   const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
-    document.body.style.overflow = "auto";
-
     let index = 0;
-
     const interval = setInterval(() => {
       setTypedText(fullText.slice(0, index + 1));
       index++;
-
-      if (index === fullText.length) {
-        clearInterval(interval);
-      }
+      if (index === fullText.length) clearInterval(interval);
     }, 120);
-
     return () => clearInterval(interval);
   }, []);
 
-  /* ===== DEMO STOCK FOR GRAPH ===== */
+  /* ===== DEMO STOCK ===== */
   const demoStock = [
-    {
-      name: "Men Shirt",
-      quantity: 48,
-      soldToday: 12,
-      price: 599,
-      cost: 420,
-    },
-    {
-      name: "Chino Pants",
-      quantity: 32,
-      soldToday: 8,
-      price: 799,
-      cost: 560,
-    },
+    { name: "Men Shirt", quantity: 48, soldToday: 12, price: 599, cost: 420 },
+    { name: "Chino Pants", quantity: 32, soldToday: 8, price: 799, cost: 560 },
   ];
 
   return (
     <div className="landing-page">
-      <Navbar />
+      <Navbar toggleTheme={toggleTheme} />
 
       {/* ================= HERO ================= */}
       <section className="flickr-landing">
         <div className="flickr-content">
-          <span className="hero-badge animate-badge">{TAGLINE}</span>
+          <span className="hero-badge">{TAGLINE}</span>
 
           <h1 className="flickr-title">
-            Smarter Retail Starts with{" "}
+            Retail Intelligence, Powered by{" "}
             <span className="heading typing-text">{typedText}</span>
           </h1>
 
           <p className="hero-subtitle">
-            Predict demand. Reduce waste. Act on data with confidence.
+            Predict demand. Reduce waste. Act with confidence.
           </p>
 
           <p className="flickr-support">
-            Vector AI is an AI-driven retail management platform that
-            optimizes inventory, and delivers real-time insights to
-            help retailers run smarter operations.
+            AI-powered retail intelligence that helps you sell smarter,
+            manage inventory better, and make faster decisions.
           </p>
 
           <div className="landing-cta">
             <button className="cta-primary" onClick={() => navigate("/login")}>
-              Sign In 
+              Get Started
             </button>
             <button
               className="cta-secondary"
@@ -89,15 +74,15 @@ function Landing() {
 
           <div className="hero-trust">
             <div className="trust-card">
-              <strong>~30%</strong>
+              <strong className="numeric">~30%</strong>
               <span>Faster Billing</span>
             </div>
             <div className="trust-card">
-              <strong>~25%</strong>
-              <span>Fewer Stock Errors</span>
+              <strong className="numeric">~25%</strong>
+              <span>Fewer Errors</span>
             </div>
             <div className="trust-card">
-              <strong>2×</strong>
+              <strong className="numeric">2×</strong>
               <span>Sales Visibility</span>
             </div>
           </div>
@@ -110,35 +95,27 @@ function Landing() {
 
         <div className="card-grid">
           <div className="info-card">
+            <TrendingUp size={26} className="feature-icon" />
             <h3>AI Demand Forecasting</h3>
-            <p>
-              Forecast product demand using historical sales data to minimize
-              overstocking and prevent stockouts.
-            </p>
+            <p>Predict demand & avoid stockouts.</p>
           </div>
 
           <div className="info-card">
-            <h3>Smart Inventory Management</h3>
-            <p>
-              Track inventory in real time with automated alerts and stock
-              insights across locations.
-            </p>
+            <Boxes size={26} className="feature-icon" />
+            <h3>Smart Inventory</h3>
+            <p>Real-time stock insights & alerts.</p>
           </div>
 
           <div className="info-card">
-            <h3>Sales & Performance Analytics</h3>
-            <p>
-              Visual dashboards that turn raw sales data into actionable
-              business decisions.
-            </p>
+            <BarChart3 size={26} className="feature-icon" />
+            <h3>Sales Analytics</h3>
+            <p>Turn sales data into decisions.</p>
           </div>
 
           <div className="info-card">
-            <h3>Unified Retail Dashboard</h3>
-            <p>
-              Manage billing, inventory, analytics, and insights from a single,
-              centralized platform.
-            </p>
+            <LayoutDashboard size={26} className="feature-icon" />
+            <h3>Unified Dashboard</h3>
+            <p>Everything in one place.</p>
           </div>
         </div>
       </section>
@@ -146,63 +123,71 @@ function Landing() {
       {/* ================= PRODUCT SHOWCASE ================= */}
       <section className="section product-showcase">
         <div className="showcase-grid">
-          {/* LEFT */}
           <div className="showcase-left">
             <h2 className="section-title">
-              How Vector AI Helps Retailers Make Smarter Decisions
+              Decisions powered by real retail data
             </h2>
 
             <p className="showcase-text">
-              Vector AI analyzes your store’s sales and inventory data to
-              highlight slow-moving products and suggest practical actions that
-              improve profitability — without changing your existing workflow.
+              Vector AI analyzes your sales and inventory to highlight
+              opportunities, reduce dead stock, and improve profitability —
+              without disrupting your workflow.
             </p>
 
             <ul className="showcase-points">
-              <li>✔ Identifies products that block capital in inventory</li>
-              <li>✔ Suggests smart bundle offers to clear dead stock</li>
-              <li>✔ Helps retailers act faster with data-backed decisions</li>
+              <li>✔ Detects slow-moving inventory</li>
+              <li>✔ Suggests smart bundle offers</li>
+              <li>✔ Enables faster data-backed actions</li>
             </ul>
 
             <div className="showcase-stats">
               <div className="stat-card">
-                <strong>40%</strong>
+                <strong className="numeric">~40%</strong>
                 <span>Faster Inventory Movement</span>
               </div>
               <div className="stat-card">
-                <strong>18%</strong>
-                <span>Improvement in Monthly Revenue</span>
+                <strong className="numeric">~18%</strong>
+                <span>Revenue Growth</span>
               </div>
             </div>
           </div>
 
-          {/* RIGHT – DASHBOARD PREVIEW */}
           <div className="showcase-right">
             <div className="dashboard-card">
-              {/* ✅ SAME DASHBOARD GRAPH */}
               <div className="chart-box landing-chart">
-                <Analytics stock={demoStock} />
+                <Analytics stock={demoStock} theme={theme} />
               </div>
 
-              <h4 className="dashboard-title">Vector AI – Feature Preview</h4>
+              <h4 className="dashboard-title">
+                Vector AI — Live Feature Preview
+              </h4>
 
               <div className="bundle-item">
-                <span>Men’s Cotton Shirt (Blue)</span>
-                <span>48 units · ₹599</span>
+                <span>Men’s Cotton Shirt</span>
+                <span>
+                  <span className="numeric">48</span> units · ₹
+                  <span className="numeric">599</span>
+                </span>
               </div>
 
               <div className="bundle-plus">+</div>
 
               <div className="bundle-item">
-                <span>Chino Pants (Navy)</span>
-                <span>32 units · ₹799</span>
+                <span>Chino Pants</span>
+                <span>
+                  <span className="numeric">32</span> units · ₹
+                  <span className="numeric">799</span>
+                </span>
               </div>
 
               <div className="bundle-result">
-                <strong>Suggested Bundle: ₹899</strong>
+                <strong>
+                  Suggested Bundle: ₹
+                  <span className="numeric">899</span>
+                </strong>
                 <span>
-                  Based on sales trends · Estimated clearance: 45 bundles /
-                  month
+                  Estimated clearance:{" "}
+                  <span className="numeric">45</span> bundles / month
                 </span>
               </div>
 
@@ -212,79 +197,36 @@ function Landing() {
               </div>
 
               <p className="demo-note">
-                Feature preview shown for demonstration purposes.
+                Feature preview for demonstration only.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= WHY RETAILVISION ================= */}
-      <section className="section alt-section">
-        <h2 className="section-title">Why Vector AI?</h2>
-
-        <div className="why-grid">
-          <div className="why-card">
-            <h3>Built for Indian Retail</h3>
-            <p>
-              Designed specifically for retailers with real-world workflows and
-              practical use cases.
-            </p>
-          </div>
-
-          <div className="why-card">
-            <h3>AI-Driven Insights</h3>
-            <p>
-              Make smarter decisions using AI-powered forecasting and analytics
-              - not guesswork.
-            </p>
-          </div>
-
-          <div className="why-card">
-            <h3>Simple, Scalable & Secure</h3>
-            <p>
-              Easy to start, quick to adopt, and scalable as your business
-              grows.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ================= USERS ================= */}
       <section className="section">
-        <h2 className="section-title">Who Is Vector AI For?</h2>
+        <h2 className="section-title">Who Is It For?</h2>
 
         <div className="card-grid">
           <div className="info-card">
             <h3>Shop Owners</h3>
-            <p>
-              Maintain complete visibility over inventory, profits, and sales
-              trends without manual tracking.
-            </p>
+            <p>Complete visibility over sales & stock.</p>
           </div>
 
           <div className="info-card">
             <h3>Store Staff</h3>
-            <p>
-              Faster billing and reduced mistakes through automated and
-              simplified workflows.
-            </p>
+            <p>Faster billing with fewer mistakes.</p>
           </div>
 
           <div className="info-card">
             <h3>Managers</h3>
-            <p>
-              Use real-time insights to plan inventory, monitor performance, and
-              optimize operations.
-            </p>
+            <p>Real-time performance tracking.</p>
           </div>
 
           <div className="info-card">
             <h3>Business Owners</h3>
-            <p>
-              Track overall performance, profitability, and growth metrics
-              across stores from a single dashboard.
-            </p>
+            <p>Monitor growth across locations.</p>
           </div>
         </div>
       </section>
@@ -301,26 +243,17 @@ function Landing() {
 
           <div className="info-card">
             <h3>Why We Exist</h3>
-            <p>
-              We eliminate manual errors and guesswork by bringing data-driven
-              decision-making to everyday retail operations.
-            </p>
+            <p>To replace guesswork with intelligence.</p>
           </div>
 
           <div className="info-card">
             <h3>Our Vision</h3>
-            <p>
-              Empower retailers with enterprise-level tools to compete
-              confidently in a digital-first retail ecosystem.
-            </p>
+            <p>Enterprise-grade tools for every retailer.</p>
           </div>
 
           <div className="info-card">
             <h3>How It Works</h3>
-            <p>
-              Vector AI connects sales and inventory data to generate insights,
-              forecasts, and recommendations — all in real time.
-            </p>
+            <p>Sales + Inventory → Insights → Action.</p>
           </div>
         </div>
       </section>
@@ -330,8 +263,7 @@ function Landing() {
         <h2 className="section-title">Contact Us</h2>
 
         <p className="section-text">
-          Have questions or want to explore how RetailVision can help your
-          business? Send us a message and our team will get back to you.
+          Want to explore Vector AI for your business?
         </p>
 
         <form className="contact-form">
@@ -344,7 +276,7 @@ function Landing() {
 
       {/* ================= FOOTER ================= */}
       <footer className="footer">
-        © 2026 Vector AI • Built for Innovation
+        © <span className="numeric">2026</span> Vector AI • Built for Innovation
       </footer>
     </div>
   );

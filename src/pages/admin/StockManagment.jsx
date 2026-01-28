@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import "../../App.css";
 
-function AdminStockManagement() {
+function AdminStockManagement({ toggleTheme }) {
   const [stock, setStock] = useState([
     {
       name: "Milk",
@@ -95,7 +95,7 @@ function AdminStockManagement() {
   return (
     <>
       {/* ✅ DASHBOARD NAVBAR */}
-      <DashboardNavbar />
+      <DashboardNavbar toggleTheme={toggleTheme} />
 
       <div className="container">
         {/* HEADER */}
@@ -190,9 +190,9 @@ function AdminStockManagement() {
               {stock.map((item, index) => (
                 <tr key={index} style={{ opacity: item.active ? 1 : 0.5 }}>
                   <td>{item.name}</td>
-                  <td>{item.quantity}</td>
+                  <td className="numeric">{item.quantity}</td>
                   <td>{item.expiry}</td>
-                  <td>₹{item.price}</td>
+                  <td className="numeric">₹{item.price}</td>
                   <td>{item.active ? "Active" : "Inactive"}</td>
                   <td>
                     <button onClick={() => toggleSelling(index)}>

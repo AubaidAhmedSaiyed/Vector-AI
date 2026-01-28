@@ -13,19 +13,44 @@ import StaffDashboard from "./pages/staff/StaffDashboard";
 import StaffStockManagement from "./pages/staff/StaffStockManagment";
 
 function App() {
+  /* ================= THEME STATE ================= */
+  const [theme, setTheme] = React.useState(localStorage.getItem("theme") || "dark");
+
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  React.useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <GoogleOAuthProvider clientId="129732006800-bm3kfa4reejbav0gggm4c642v3imrab0.apps.googleusercontent.com">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Landing toggleTheme={toggleTheme} theme={theme} />} />
+          <Route path="/login" element={<Login toggleTheme={toggleTheme} theme={theme} />} />
+          <Route path="/signup" element={<Signup toggleTheme={toggleTheme} theme={theme} />} />
 
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/stock" element={<AdminStockManagement />} />
+          <Route
+            path="/admin/dashboard"
+            element={<AdminDashboard toggleTheme={toggleTheme} theme={theme} />}
+          />
+          <Route
+            path="/admin/stock"
+            element={<AdminStockManagement toggleTheme={toggleTheme} theme={theme} />}
+          />
 
-          <Route path="/staff/dashboard" element={<StaffDashboard />} />
-          <Route path="/staff/stock" element={<StaffStockManagement />} />
+          <Route
+            path="/staff/dashboard"
+            element={<StaffDashboard toggleTheme={toggleTheme} theme={theme} />}
+          />
+          <Route
+            path="/staff/stock"
+            element={<StaffStockManagement toggleTheme={toggleTheme} theme={theme} />}
+          />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider>

@@ -7,7 +7,7 @@ import "../App.css";
 // ✅ API IMPORT
 import { loginUser } from "../Api/Api";
 
-function Login() {
+function Login({ toggleTheme }) {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -47,11 +47,11 @@ function Login() {
 
   return (
     <>
-      <Navbar variant="minimal" />
+      <Navbar variant="minimal" toggleTheme={toggleTheme} />
 
       <div className="login-container">
         <div className="login-card glass">
-          <h2>Login to RetailVision</h2>
+          <h2>Login to Vector AI</h2>
 
           <p className="note" style={{ marginBottom: "12px" }}>
             <strong>Demo Credentials:</strong><br />

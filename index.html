@@ -1,35 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/public/favicon.ico" />
+    <!-- Poppins for text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Baloo Bhai 2 for numbers -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Theme style handled via App.css and data-theme attribute -->
+    <!-- <link id="theme-style" rel="stylesheet" href="/themes/Dark.css" /> -->
+
+    <!-- ✅ TAB / BROWSER LOGO -->
+    <link rel="icon" type="image/png" href="/logo512.png" />
+
+    <!-- Mobile / PWA -->
+    <link rel="apple-touch-icon" href="/logo512.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#020617" />
+
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Vector AI – Smarter retail decisions powered by AI"
     />
-    <link rel="apple-touch-icon" href="/public/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+
+    <!-- Manifest -->
     <link rel="manifest" href="/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <title>RetailVision</title>
+    <!-- ✅ TAB TITLE (YouTube jaisa) -->
+    <title>Vector AI</title>
   </head>
+
   <body>
     <div id="root"></div>
+
+    <!-- Vite entry -->
     <script type="module" src="/src/index.jsx"></script>
   </body>
 </html>

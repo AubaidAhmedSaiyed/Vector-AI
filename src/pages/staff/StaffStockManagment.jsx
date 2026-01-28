@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import "../../App.css";
 
-function StaffStockManagement() {
+function StaffStockManagement({ toggleTheme }) {
   const [stock] = useState([
     { name: "Milk", quantity: 20, expiry: "2026-01-10" },
     { name: "Maggi", quantity: 40, expiry: "2026-03-01" },
@@ -10,7 +10,7 @@ function StaffStockManagement() {
 
   return (
     <>
-      <Navbar variant="dashboard" />
+      <Navbar variant="dashboard" toggleTheme={toggleTheme} />
 
       <div className="container">
         <div className="card">
@@ -35,7 +35,7 @@ function StaffStockManagement() {
               {stock.map((item, i) => (
                 <tr key={i}>
                   <td>{item.name}</td>
-                  <td>{item.quantity}</td>
+                  <td className="numeric">{item.quantity}</td>
                   <td>{item.expiry}</td>
                 </tr>
               ))}

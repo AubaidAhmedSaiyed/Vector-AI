@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 
-const Signup = () => {
+const Signup = ({ toggleTheme }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -29,58 +29,58 @@ const Signup = () => {
   };
 
   return (
-  <>
-    {/* ✅ Navbar add karo */}
-    <Navbar variant="minimal" />
+    <>
+      {/* ✅ Navbar add karo */}
+      <Navbar variant="minimal" toggleTheme={toggleTheme} />
 
-    <div className="login-container">
-      <div className="login-card">
-        <h2>Create Account</h2>
+      <div className="login-container">
+        <div className="login-card">
+          <h2>Create Account</h2>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            name="name"
-            placeholder="Full Name"
-            onChange={handleChange}
-            required
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              name="name"
+              placeholder="Full Name"
+              onChange={handleChange}
+              required
+            />
 
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              onChange={handleChange}
+              required
+            />
 
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
 
-          <div className="role-select">
-  <select name="role" onChange={handleChange}>
-    <option value="staff">Staff</option>
-    <option value="admin">Admin</option>
-  </select>
-</div>
+            <div className="role-select">
+              <select name="role" onChange={handleChange}>
+                <option value="staff">Staff</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
 
 
-          <button type="submit" className="login-btn">
-            Sign Up
-          </button>
-        </form>
+            <button type="submit" className="login-btn">
+              Sign Up
+            </button>
+          </form>
 
-        <p className="note">
-          Already have account? <Link to="/login">Login now</Link>
-        </p>
+          <p className="note">
+            Already have account? <Link to="/login">Login now</Link>
+          </p>
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 
 };
 

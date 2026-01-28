@@ -33,7 +33,7 @@ export const demoStockData = [
   },
 ];
 
-function Dashboard() {
+function Dashboard({ toggleTheme, theme }) {
   const [stock, setStock] = useState(demoStockData);
 
   // 🔥 suggestions state
@@ -44,10 +44,10 @@ function Dashboard() {
     const updatedStock = stock.map((item) =>
       item.name === itemName
         ? {
-            ...item,
-            quantity: item.quantity - soldQty,
-            soldToday: item.soldToday + soldQty,
-          }
+          ...item,
+          quantity: item.quantity - soldQty,
+          soldToday: item.soldToday + soldQty,
+        }
         : item
     );
     setStock(updatedStock);
@@ -65,7 +65,7 @@ function Dashboard() {
 
   return (
     <>
-      <DashboardNavbar />
+      <DashboardNavbar toggleTheme={toggleTheme} />
 
       <div className="container">
         {/* SALES FORM */}
@@ -81,11 +81,11 @@ function Dashboard() {
         {/* ANALYTICS */}
         <div className="analytics-row">
           <div className="card chart-box">
-            <Analytics stock={stock} />
+            <Analytics stock={stock} theme={theme} />
           </div>
 
           <div className="card chart-box">
-            <InventoryPie stock={stock} />
+            <InventoryPie stock={stock} theme={theme} />
           </div>
         </div>
 

@@ -4,9 +4,14 @@ import StockTable from "../../components/StockTable";
 import Alerts from "../../components/Alerts";
 import "../../App.css";
 
-function StaffDashboard() {
+function StaffDashboard({ toggleTheme }) {
   return (
-      <p>Staffdashboared</p>
+    <>
+      <Navbar variant="dashboard" toggleTheme={toggleTheme} />
+      <div className="container">
+        <p>Staff Dashboard</p>
+      </div>
+    </>
   );
 }
 

@@ -14,7 +14,7 @@ function StockTable({ stock }) {
           {stock.map((item, index) => (
             <tr key={index}>
               <td>{item.name}</td>
-              <td>{item.quantity}</td>
+              <td className="numeric">{item.quantity}</td>
               <td>{item.expiry}</td>
             </tr>
           ))}

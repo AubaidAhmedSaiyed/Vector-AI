@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { BRAND_NAME } from "../config/brand";
 import logo from "../assets/logo.png";
+import { SunMoon } from "lucide-react";
 
-function DashboardNavbar() {
+function DashboardNavbar({ toggleTheme }) {
   const navigate = useNavigate();
   const role = localStorage.getItem("role") === "admin" ? "admin" : "staff";
   const [open, setOpen] = useState(false);
@@ -29,18 +30,25 @@ function DashboardNavbar() {
           </button>
 
           <div className="brand">
-            <img
-              src={logo}
-              alt="Vector AI Logo"
-              className="brand-logo"
-            />
+            <img src={logo} alt="Vector AI Logo" className="brand-logo" />
             <span>{BRAND_NAME}</span>
           </div>
         </div>
 
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
+        <div className="nav-actions">
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            title="Switch theme"
+            className="theme-toggle-btn"
+          >
+            <SunMoon size={18} />
+          </button>
+
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* SIDEBAR */}
