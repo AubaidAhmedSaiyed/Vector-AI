@@ -1,4 +1,4 @@
-const DEFAULT_API_BASE_URL = "https://vector-ai-4j3r.onrender.com/api";
+const DEFAULT_API_BASE_URL = "https://vector-ai-4j3r.onrender.com";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
 
@@ -13,7 +13,7 @@ const request = async (path, options = {}) => {
   };
 
   try {
-    const response = await fetch(`${API_BASE_URL}${path}`, {
+    const response = await fetch(`${API_BASE_URL}/api${path}`, {
       cache: "no-store",
       mode: "cors",
       ...options,
