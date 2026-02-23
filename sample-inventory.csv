@@ -1,0 +1,7 @@
+name,sku,quantity,price,category
+Rice 5kg,SKU-RICE-001,120,450,Grocery
+Sunflower Oil 1L,SKU-OIL-001,80,160,Grocery
+Bath Soap Pack,SKU-SOAP-001,150,95,Personal Care
+Toothpaste 150g,SKU-TP-001,90,110,Personal Care
+Notebook A4,SKU-NB-001,200,60,Stationery
+maggie,SKU-MAGGIE-001,40,Grocery
