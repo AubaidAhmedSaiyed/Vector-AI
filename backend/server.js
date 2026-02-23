@@ -29,6 +29,17 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('Vector-AI Backend Running');
+});
+
+app.get('/api', (req, res) => {
+  res.json({
+    message: 'API is working',
+    status: 'success'
+  });
+});
+
 const uploadsDir = process.env.UPLOAD_DIR
   || (process.env.NODE_ENV === 'production' ? os.tmpdir() : path.join(__dirname, 'uploads'));
 if (uploadsDir !== os.tmpdir() && !fs.existsSync(uploadsDir)) {
