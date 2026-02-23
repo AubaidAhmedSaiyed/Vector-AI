@@ -1,6 +1,7 @@
-const DEFAULT_API_BASE_URL = "https://vector-ai-4j3r.onrender.com";
+const DEFAULT_API_BASE_URL = "https://vector-ai-backend-h7z7.onrender.com/api";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
+export const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
 
 const request = async (path, options = {}) => {
   const isFormData = typeof FormData !== "undefined" && options.body instanceof FormData;
@@ -13,7 +14,7 @@ const request = async (path, options = {}) => {
   };
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api${path}`, {
+    const response = await fetch(`${API_BASE_URL}${path}`, {
       cache: "no-store",
       mode: "cors",
       ...options,
@@ -43,6 +44,9 @@ const request = async (path, options = {}) => {
 };
 
 const mapProductToStockItem = (product) => ({
+
+
+
   id: product._id,
   name: product.name,
   quantity: product.quantity ?? 0,
