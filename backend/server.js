@@ -9,6 +9,7 @@ const cors = require('cors');
 const multer = require('multer');
 const csv = require('csv-parser');
 const fs = require('fs');
+const os = require('os');
 
 const Inventory = require('./models/Inventory');
 
@@ -28,8 +29,9 @@ app.use((req, res, next) => {
   next();
 });
 
-const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
+const uploadsDir = process.env.UPLOAD_DIR
+  || (process.env.NODE_ENV === 'production' ? os.tmpdir() : path.join(__dirname, 'uploads'));
+if (uploadsDir !== os.tmpdir() && !fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
