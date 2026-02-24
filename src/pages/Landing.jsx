@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Analytics from "../components/Analytics";
+import Footer from "../components/Footer";
 import {
   BRAND_NAME,
   TAGLINE,
@@ -12,6 +13,8 @@ import {
   Boxes,
   BarChart3,
   LayoutDashboard,
+  ArrowRight,
+  Play
 } from "lucide-react";
 
 function Landing({ toggleTheme, theme }) {
@@ -43,7 +46,7 @@ function Landing({ toggleTheme, theme }) {
 
       {/* ================= HERO ================= */}
       <section className="flickr-landing">
-        <div className="flickr-content">
+        <div className="flickr-content fade-in">
           <span className="hero-badge">{TAGLINE}</span>
 
           <h1 className="flickr-title">
@@ -62,26 +65,26 @@ function Landing({ toggleTheme, theme }) {
 
           <div className="landing-cta">
             <button className="cta-primary" onClick={() => navigate("/login")}>
-              Get Started
+              Get Started <ArrowRight size={18} />
             </button>
             <button
               className="cta-secondary"
               onClick={() => navigate("/signup")}
             >
-              View Demo
+              <Play size={18} /> View Demo
             </button>
           </div>
 
           <div className="hero-trust">
-            <div className="trust-card">
+            <div className="trust-card delay-1">
               <strong className="numeric">~30%</strong>
               <span>Faster Billing</span>
             </div>
-            <div className="trust-card">
+            <div className="trust-card delay-2">
               <strong className="numeric">~25%</strong>
               <span>Fewer Errors</span>
             </div>
-            <div className="trust-card">
+            <div className="trust-card delay-3">
               <strong className="numeric">2×</strong>
               <span>Sales Visibility</span>
             </div>
@@ -90,41 +93,49 @@ function Landing({ toggleTheme, theme }) {
       </section>
 
       {/* ================= FEATURES ================= */}
-      <section className="section">
+      <section className="section fade-in">
         <h2 className="section-title">Key Features</h2>
 
         <div className="card-grid">
-          <div className="info-card">
-            <TrendingUp size={26} className="feature-icon" />
+          <div className="info-card delay-1">
+            <div className="feature-icon">
+              <TrendingUp size={26} />
+            </div>
             <h3>AI Demand Forecasting</h3>
-            <p>Predict demand & avoid stockouts.</p>
+            <p>Predict demand & avoid stockouts with high-precision AI models.</p>
           </div>
 
-          <div className="info-card">
-            <Boxes size={26} className="feature-icon" />
+          <div className="info-card delay-2">
+            <div className="feature-icon">
+              <Boxes size={26} />
+            </div>
             <h3>Smart Inventory</h3>
-            <p>Real-time stock insights & alerts.</p>
+            <p>Real-time stock insights & automated low-stock alerts.</p>
           </div>
 
-          <div className="info-card">
-            <BarChart3 size={26} className="feature-icon" />
+          <div className="info-card delay-3">
+            <div className="feature-icon">
+              <BarChart3 size={26} />
+            </div>
             <h3>Sales Analytics</h3>
-            <p>Turn sales data into decisions.</p>
+            <p>Turn complex sales data into actionable business decisions.</p>
           </div>
 
-          <div className="info-card">
-            <LayoutDashboard size={26} className="feature-icon" />
+          <div className="info-card delay-1">
+            <div className="feature-icon">
+              <LayoutDashboard size={26} />
+            </div>
             <h3>Unified Dashboard</h3>
-            <p>Everything in one place.</p>
+            <p>Monitor your entire retail operation from a single interface.</p>
           </div>
         </div>
       </section>
 
       {/* ================= PRODUCT SHOWCASE ================= */}
-      <section className="section product-showcase">
+      <section className="section product-showcase fade-in">
         <div className="showcase-grid">
           <div className="showcase-left">
-            <h2 className="section-title">
+            <h2 className="section-title" style={{ textAlign: 'left', left: '0', transform: 'none' }}>
               Decisions powered by real retail data
             </h2>
 
@@ -142,11 +153,11 @@ function Landing({ toggleTheme, theme }) {
 
             <div className="showcase-stats">
               <div className="stat-card">
-                <strong className="numeric">~40%</strong>
+                <strong className="numeric" style={{ fontSize: '2.5rem', display: 'block', background: 'var(--primary-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>~40%</strong>
                 <span>Faster Inventory Movement</span>
               </div>
               <div className="stat-card">
-                <strong className="numeric">~18%</strong>
+                <strong className="numeric" style={{ fontSize: '2.5rem', display: 'block', background: 'var(--primary-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>~18%</strong>
                 <span>Revenue Growth</span>
               </div>
             </div>
@@ -205,79 +216,80 @@ function Landing({ toggleTheme, theme }) {
       </section>
 
       {/* ================= USERS ================= */}
-      <section className="section">
+      <section className="section fade-in">
         <h2 className="section-title">Who Is It For?</h2>
 
         <div className="card-grid">
-          <div className="info-card">
+          <div className="info-card delay-1">
             <h3>Shop Owners</h3>
-            <p>Complete visibility over sales & stock.</p>
+            <p>Complete visibility over sales & stock performance across all your business locations.</p>
           </div>
 
-          <div className="info-card">
+          <div className="info-card delay-2">
             <h3>Store Staff</h3>
-            <p>Faster billing with fewer mistakes.</p>
+            <p>Faster billing with fewer mistakes and instant inventory lookups at your fingertips.</p>
           </div>
 
-          <div className="info-card">
+          <div className="info-card delay-3">
             <h3>Managers</h3>
-            <p>Real-time performance tracking.</p>
+            <p>Real-time performance tracking and automated reports for data-driven management.</p>
           </div>
 
-          <div className="info-card">
+          <div className="info-card delay-1">
             <h3>Business Owners</h3>
-            <p>Monitor growth across locations.</p>
+            <p>Enterprise-grade intelligence to scale your business and outpace the competition.</p>
           </div>
         </div>
       </section>
 
       {/* ================= ABOUT ================= */}
-      <section className="section alt-section">
+      <section className="section alt-section fade-in">
         <h2 className="section-title">About Vector AI</h2>
 
         <div className="card-grid">
-          <div className="info-card">
+          <div className="info-card delay-1">
             <h3>What We Do</h3>
             <p>{BRAND_DESCRIPTION}</p>
           </div>
 
-          <div className="info-card">
+          <div className="info-card delay-2">
             <h3>Why We Exist</h3>
-            <p>To replace guesswork with intelligence.</p>
+            <p>To replace guesswork with intelligence, helping small to large retailers thrive.</p>
           </div>
 
-          <div className="info-card">
+          <div className="info-card delay-3">
             <h3>Our Vision</h3>
-            <p>Enterprise-grade tools for every retailer.</p>
+            <p>Making enterprise-grade tools accessible to every retailer world-wide.</p>
           </div>
 
-          <div className="info-card">
+          <div className="info-card delay-1">
             <h3>How It Works</h3>
-            <p>Sales + Inventory → Insights → Action.</p>
+            <p>Connect your sales + inventory data to get real-time insights and automated actions.</p>
           </div>
         </div>
       </section>
 
       {/* ================= CONTACT ================= */}
-      <section className="section contact-highlight">
-        <h2 className="section-title">Contact Us</h2>
+      <section className="section contact-highlight fade-in">
+        <div className="info-card" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 className="section-title" style={{ marginBottom: '30px' }}>Contact Us</h2>
+          <p className="section-text" style={{ marginBottom: '40px' }}>
+            Ready to transform your retail business with AI? Get in touch with our team today.
+          </p>
 
-        <p className="section-text">
-          Want to explore Vector AI for your business?
-        </p>
-
-        <form className="contact-form">
-          <input type="text" placeholder="Your Name" />
-          <input type="email" placeholder="Your Email" />
-          <textarea placeholder="Your Message"></textarea>
-          <button type="submit">Send Message</button>
-        </form>
+          <form className="contact-form">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+              <input type="text" placeholder="Your Name" style={{ margin: '0' }} />
+              <input type="email" placeholder="Your Email" style={{ margin: '0' }} />
+            </div>
+            <textarea placeholder="Your Message" style={{ width: '100%', marginBottom: '20px', minHeight: '120px' }}></textarea>
+            <button className="cta-primary" style={{ width: '100%', justifyContent: 'center' }} type="submit">Send Message <ArrowRight size={18} /></button>
+          </form>
+        </div>
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer className="footer">
-        © <span className="numeric">2026</span> Vector AI • Built for Innovation
-      </footer>
+      <Footer />
     </div>
   );
 }
