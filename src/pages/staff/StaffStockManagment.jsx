@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/DashboardNavbar";
 import "../../App.css";
 
 function StaffStockManagement({ toggleTheme }) {

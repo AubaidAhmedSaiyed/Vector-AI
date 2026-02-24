@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BRAND_NAME } from "../config/brand";
 import logo from "../assets/logo.png";
 import { SunMoon } from "lucide-react";
+import React from "react";
 
 const Navbar = ({ toggleTheme, variant }) => {
   const navigate = useNavigate();
