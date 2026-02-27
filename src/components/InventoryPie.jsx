@@ -7,9 +7,19 @@ import {
 import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+function InventoryPie({ stock = [], theme = "dark", loading = false, error = "" }) {
+  if (loading) {
+    return <p className="note">Loading chart...</p>;
+  }
 
+  if (error) {
+    return <p className="note">Unable to render inventory chart.</p>;
+  }
 
-function InventoryPie({ stock, theme = "dark" }) {
+  if (stock.length === 0) {
+    return <p className="note">No inventory data available.</p>;
+  }
+
   const data = {
     labels: stock.map((item) => item.name),
     datasets: [

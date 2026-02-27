@@ -9,7 +9,13 @@
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^4.5.1",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "lucide-react": "^0.563.0",
+    "mongoose": "^8.19.2",
+    "multer": "^2.0.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "react": "^19.2.3",
@@ -20,6 +26,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "server": "node backend/server.js",
     "build": "vite build",
     "preview": "vite preview"
   },

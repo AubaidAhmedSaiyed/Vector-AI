@@ -1,11 +1,69 @@
-// src/api/api.js
+const DEFAULT_API_BASE_URL = "https://vector-ai-backend-h7z7.onrender.com/api";
 
-// 🔹 BASE CONFIG (future backend)
-const BASE_URL = "http://localhost:5000/api"; // future use
+export const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
+
+const request = async (path, options = {}) => {
+  const isFormData = typeof For
+  
+ mData !== "undefined" && options.body instanceof FormData;
+  const method = String(options.method || "GET").toUpperCase();
+  const hasBody = options.body !== undefined && options.body !== null;
+
+  const headers = {
+    ...(hasBody && !isFormData ? { "Content-Type": "application/json" } : {}),
+    ...(options.headers || {}),
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+      cache: "no-store",
+      mode: "cors",
+      ...options,
+      method,
+      headers,
+    });
+
+    let body = null;
+    try {
+      body = await response.json();
+    } catch (error) {
+      body = null;
+    }
+
+    if (!response.ok) {
+      const message = body?.message || `Request failed (${response.status})`;
+      throw new Error(message);
+    }
+
+    return body;
+  } catch (error) {
+    if (error instanceof Error && error.message) {
+      throw error;
+    }
+    throw new Error("Failed to fetch");
+  }
+};
+
+const mapProductToStockItem = (product) => ({
+
+
+
+  id: product._id,
+  name: product.name,
+  quantity: product.quantity ?? 0,
+  price: product.price ?? 0,
+  cost: product.cost ?? 0,
+  sku: product.sku,
+  category: product.category || "",
+  brand: product.brand || "",
+  reorderPoint: 0,
+  safetyStock: 0
+});
 
 /* ================= AUTH ================= */
 
-// Demo login (email/password)
+// Keep demo auth until backend auth routes are added.
 export const loginUser = async (email, password) => {
   if (email === "admin@retail.com" && password === "admin123") {
     return { role: "admin", token: "demo-admin-token" };
@@ -18,110 +76,143 @@ export const loginUser = async (email, password) => {
   throw new Error("Invalid credentials");
 };
 
-
 /* ================= STOCK ================= */
 
-// Get stock list
-export const getStock = async () => {
-  return [
-    {
-      name: "Milk",
-      quantity: 20,
-      price: 30,
-      cost: 25,
-      expiry: "2026-01-10",
-    },
-    {
-      name: "Maggi",
-      quantity: 40,
-      price: 15,
-      cost: 10,
-      expiry: "2026-03-01",
-    },
-  ];
+const normalizeInventoryPayload = (item = {}) => ({
+  name: item.name,
+  sku: item.sku,
+  category: item.category,
+  quantity: Number(item.quantity ?? 0),
+  price: Number(item.price ?? 0),
+});
+
+export const getInventory = async () => {
+  const products = await request("/inventory");
+  return products.map(mapProductToStockItem);
 };
 
-// Add stock item
-export const addStockItem = async (item) => {
-  return { success: true, item };
+export const addInventoryItem = async (item) => {
+  const payload = normalizeInventoryPayload(item);
+  const created = await request("/inventory", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
+  return { success: true, item: mapProductToStockItem(created) };
 };
 
-// Update stock (sale / edit)
-export const updateStock = async (itemName, soldQty) => {
+export const updateInventoryItem = async (itemId, updates) => {
+  const payload =
+    typeof updates === "number"
+      ? { quantity: updates }
+      : {
+          ...normalizeInventoryPayload(updates),
+          name: updates?.name,
+          sku: updates?.sku,
+          category: updates?.category
+        };
+
+  const updated = await request(`/inventory/${itemId}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+
+  return { success: true, item: mapProductToStockItem(updated) };
+};
+
+export const deleteInventoryItem = async (itemId) => {
+  await request(`/inventory/${itemId}`, { method: "DELETE" });
   return { success: true };
 };
 
-// Activate / Deactivate product
 export const toggleProductStatus = async (productName, active) => {
-  return { success: true };
+  return { success: true, productName, active };
 };
+
+export const uploadCSV = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  return request("/upload-csv", {
+    method: "POST",
+    body: formData,
+  });
+};
+
+// Backward compatible aliases.
+export const getStock = getInventory;
+export const addStockItem = addInventoryItem;
+export const updateStock = updateInventoryItem;
+export const deleteStockItem = deleteInventoryItem;
+export const uploadInventoryCsv = uploadCSV;
 
 /* ================= SALES ================= */
 
-// Daily sale entry
 export const addDailySale = async ({ productName, quantity }) => {
   return {
     success: true,
-    message: "Sale recorded",
+    message: `Sale placeholder saved for ${productName} (${quantity})`,
   };
 };
 
-// Get today sales
 export const getTodaySales = async () => {
-  return [
-    { product: "Milk", sold: 5 },
-    { product: "Maggi", sold: 10 },
-  ];
+  return [];
 };
 
 /* ================= ANALYTICS ================= */
 
-// Profit analytics
 export const getProfitAnalytics = async () => {
-  return {
-    totalProfit: 250,
-    byProduct: [
-      { name: "Milk", profit: 100 },
-      { name: "Maggi", profit: 150 },
-    ],
-  };
+  const stock = await getInventory();
+  const byProduct = stock.map((item) => ({
+    name: item.name,
+    profit: (item.price - item.cost) * item.quantity,
+  }));
+  const totalProfit = byProduct.reduce((sum, row) => sum + row.profit, 0);
+
+  return { totalProfit, byProduct };
 };
 
-// Inventory distribution
 export const getInventoryAnalytics = async () => {
-  return [
-    { name: "Milk", quantity: 20 },
-    { name: "Maggi", quantity: 40 },
-  ];
+  const stock = await getInventory();
+  return stock.map((item) => ({ name: item.name, quantity: item.quantity }));
 };
 
 /* ================= ALERTS ================= */
 
-// Expiry alerts
 export const getExpiryAlerts = async () => {
-  return [
-    {
-      product: "Milk",
-      expiry: "2026-01-10",
-      daysLeft: 5,
-    },
-  ];
+  await request("/ml/historical-data?limit=200");
+  return [];
 };
 
 /* ================= AI SUGGESTIONS ================= */
 
-// Sales suggestions (AI placeholder)
 export const getSalesSuggestions = async () => {
-  return [
-    {
-      product: "Milk",
-      pairWith: ["Bread", "Biscuit"],
-      offer: "Buy Milk + Bread & get 5% off",
-    },
-    {
-      product: "Maggi",
-      pairWith: ["Sauce", "Masala"],
-      offer: "Buy 2 Maggi & get Sauce free",
-    },
-  ];
+  const stock = await getInventory();
+  const lowStock = stock
+    .filter((item) => item.quantity <= Math.max(item.reorderPoint, item.safetyStock))
+    .slice(0, 3);
+
+  if (lowStock.length === 0) {
+    return [];
+  }
+
+  return lowStock.map((item) => ({
+    product: item.name,
+    pairWith: ["Bundle Item A", "Bundle Item B"],
+    offer: `Restock ${item.name} soon and run a combo offer`,
+  }));
+};
+
+/* ================= ML HOOKS ================= */
+
+export const getHistoricalData = async (params = "") => {
+  const suffix = params ? `?${params}` : "";
+  return request(`/ml/historical-data${suffix}`);
+};
+
+export const updateForecasts = async (forecasts) => {
+  return request("/ml/update-forecasts", {
+    method: "POST",
+    body: JSON.stringify({ forecasts }),
+  });
 };

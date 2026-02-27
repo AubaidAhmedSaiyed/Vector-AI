@@ -11,53 +11,75 @@ import DashboardNavbar from "../../components/DashboardNavbar";
 import "../../App.css";
 
 // ✅ API
-import { getSalesSuggestions } from "../../Api/Api";
-
-/* 🔹 EXPORTABLE DEMO STOCK (Landing / Showcase use) */
-export const demoStockData = [
-  {
-    name: "Milk",
-    quantity: 20,
-    soldToday: 0,
-    price: 30,
-    cost: 25,
-    expiry: "2026-01-10",
-  },
-  {
-    name: "Maggi",
-    quantity: 40,
-    soldToday: 0,
-    price: 15,
-    cost: 10,
-    expiry: "2026-03-01",
-  },
-];
+import { getInventory, getSalesSuggestions, updateInventoryItem } from "../../Api/Api";
 
 function Dashboard({ toggleTheme, theme }) {
-  const [stock, setStock] = useState(demoStockData);
+  const [stock, setStock] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   // 🔥 suggestions state
   const [suggestions, setSuggestions] = useState([]);
 
   /* ================= SALES ================= */
-  const addSale = (itemName, soldQty) => {
-    const updatedStock = stock.map((item) =>
-      item.name === itemName
-        ? {
-          ...item,
-          quantity: item.quantity - soldQty,
-          soldToday: item.soldToday + soldQty,
-        }
-        : item
-    );
-    setStock(updatedStock);
+  const addSale = async (itemName, soldQty) => {
+    const matchedItem = stock.find((item) => item.name === itemName);
+    if (!matchedItem) {
+      setError("Item not found in inventory. Please select a valid product.");
+      return;
+    }
+
+    const safeSoldQty = Number(soldQty);
+    if (!Number.isFinite(safeSoldQty) || safeSoldQty <= 0) {
+      return;
+    }
+
+    const nextQty = Math.max(0, Number(matchedItem.quantity || 0) - safeSoldQty);
+    try {
+      setError("");
+      await updateInventoryItem(matchedItem.id, { quantity: nextQty });
+      setStock((prev) =>
+        prev.map((item) =>
+          item.id === matchedItem.id
+            ? { ...item, quantity: nextQty, soldToday: (item.soldToday || 0) + safeSoldQty }
+            : item
+        )
+      );
+    } catch (updateError) {
+      console.error("Failed to record sale", updateError);
+      setError("Failed to update stock. Please try again.");
+    }
   };
 
-  /* ================= LOAD SUGGESTIONS ================= */
+  const loadInventory = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const items = await getInventory();
+      setStock(items.map((item) => ({ ...item, soldToday: item.soldToday || 0 })));
+    } catch (loadError) {
+      console.error("Failed to load inventory", loadError);
+      setError(loadError?.message || "Unable to load inventory from backend.");
+      setStock([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= LOAD DATA ================= */
+  useEffect(() => {
+    loadInventory();
+  }, []);
+
   useEffect(() => {
     const loadSuggestions = async () => {
-      const data = await getSalesSuggestions();
-      setSuggestions(data);
+      try {
+        const data = await getSalesSuggestions();
+        setSuggestions(data);
+      } catch (suggestionError) {
+        console.error("Failed to load sales suggestions", suggestionError);
+        setSuggestions([]);
+      }
     };
 
     loadSuggestions();
@@ -70,12 +92,12 @@ function Dashboard({ toggleTheme, theme }) {
       <div className="container">
         {/* SALES FORM */}
         <div className="card">
-          <SalesForm addSale={addSale} />
+          <SalesForm addSale={addSale} stock={stock} loading={loading} />
         </div>
 
         {/* STOCK TABLE */}
         <div className="card">
-          <StockTable stock={stock} />
+          <StockTable stock={stock} loading={loading} error={error} />
         </div>
 
         {/* ANALYTICS */}
@@ -85,7 +107,7 @@ function Dashboard({ toggleTheme, theme }) {
           </div>
 
           <div className="card chart-box">
-            <InventoryPie stock={stock} theme={theme} />
+            <InventoryPie stock={stock} theme={theme} loading={loading} error={error} />
           </div>
         </div>
 
