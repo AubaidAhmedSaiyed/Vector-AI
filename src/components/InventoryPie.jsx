@@ -26,8 +26,8 @@ function InventoryPie({ stock = [], theme = "dark", loading = false, error = "" 
       {
         data: stock.map((item) => item.quantity),
         backgroundColor: [
-          "rgba(6,182,212,0.85)",   // Cyan
-          "rgba(99,102,241,0.85)",   // Indigo
+          "rgba(234, 88, 12, 0.85)",   // Orange 600
+          "rgba(99, 102, 241, 0.85)",   // Indigo 500
         ],
         borderWidth: 0,
       },
