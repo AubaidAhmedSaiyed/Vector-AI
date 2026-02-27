@@ -4,7 +4,9 @@ export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
 
 const request = async (path, options = {}) => {
-  const isFormData = typeof FormData !== "undefined" && options.body instanceof FormData;
+  const isFormData = typeof For
+  
+ mData !== "undefined" && options.body instanceof FormData;
   const method = String(options.method || "GET").toUpperCase();
   const hasBody = options.body !== undefined && options.body !== null;
 
