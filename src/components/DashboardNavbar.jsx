@@ -54,11 +54,17 @@ function DashboardNavbar({ toggleTheme }) {
       {/* SIDEBAR */}
       <div className={`sidebar ${open ? "open" : ""}`}>
         <button className="sidebar-btn" onClick={() => goTo("dashboard")}>
-          📊 Dashboard
+           Dashboard
         </button>
 
         <button className="sidebar-btn" onClick={() => goTo("stock")}>
-          📦 Stock
+           Stock
+        </button>
+        <button className="sidebar-btn" onClick={() => goTo("procurement")}>
+           Procurement
+        </button>
+        <button className="sidebar-btn" onClick={() => goTo("intelligence")}>
+           Intelligence
         </button>
       </div>
 

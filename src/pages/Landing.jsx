@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Analytics from "../components/Analytics";
+import Footer from "../components/Footer";
 import {
   BRAND_NAME,
   TAGLINE,
@@ -273,11 +274,7 @@ function Landing({ toggleTheme, theme }) {
           <button type="submit">Send Message</button>
         </form>
       </section>
-
-      {/* ================= FOOTER ================= */}
-      <footer className="footer">
-        © <span className="numeric">2026</span> Vector AI • Built for Innovation
-      </footer>
+      <Footer />
     </div>
   );
 }

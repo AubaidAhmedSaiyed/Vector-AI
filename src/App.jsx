@@ -9,12 +9,17 @@ import Signup from "./pages/Signup";
 
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminStockManagement from "./pages/admin/StockManagment";
+import Procurement from "./pages/admin/Procurement";
+import Intelligence from "./pages/admin/Intelligence";
 import StaffDashboard from "./pages/staff/StaffDashboard";
-import StaffStockManagement from "./pages/staff/StaffStockManagment";
+import StaffReports from "./pages/staff/StaffReports";
+import StaffOrders from "./pages/staff/StaffOrders";
 
 function App() {
   /* ================= THEME STATE ================= */
-  const [theme, setTheme] = React.useState(localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = React.useState(
+    localStorage.getItem("theme") || "dark",
+  );
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -30,9 +35,18 @@ function App() {
     <GoogleOAuthProvider clientId="129732006800-bm3kfa4reejbav0gggm4c642v3imrab0.apps.googleusercontent.com">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Landing toggleTheme={toggleTheme} theme={theme} />} />
-          <Route path="/login" element={<Login toggleTheme={toggleTheme} theme={theme} />} />
-          <Route path="/signup" element={<Signup toggleTheme={toggleTheme} theme={theme} />} />
+          <Route
+            path="/"
+            element={<Landing toggleTheme={toggleTheme} theme={theme} />}
+          />
+          <Route
+            path="/login"
+            element={<Login toggleTheme={toggleTheme} theme={theme} />}
+          />
+          <Route
+            path="/signup"
+            element={<Signup toggleTheme={toggleTheme} theme={theme} />}
+          />
 
           <Route
             path="/admin/dashboard"
@@ -40,7 +54,9 @@ function App() {
           />
           <Route
             path="/admin/stock"
-            element={<AdminStockManagement toggleTheme={toggleTheme} theme={theme} />}
+            element={
+              <AdminStockManagement toggleTheme={toggleTheme} theme={theme} />
+            }
           />
 
           <Route
@@ -48,8 +64,25 @@ function App() {
             element={<StaffDashboard toggleTheme={toggleTheme} theme={theme} />}
           />
           <Route
-            path="/staff/stock"
-            element={<StaffStockManagement toggleTheme={toggleTheme} theme={theme} />}
+            path="/staff/StaffOrders"
+            element={
+              <StaffOrders toggleTheme={toggleTheme} theme={theme} />
+            }
+          />
+          <Route
+             path="/staff/StaffReports"
+             element={
+                <StaffReports toggleTheme={toggleTheme} theme={theme} />
+             }
+          />
+          <Route
+            path="/admin/procurement"
+            element={<Procurement toggleTheme={toggleTheme} theme={theme} />}
+          />
+
+          <Route
+            path="/admin/intelligence"
+            element={<Intelligence toggleTheme={toggleTheme} theme={theme} />}
           />
         </Routes>
       </BrowserRouter>
