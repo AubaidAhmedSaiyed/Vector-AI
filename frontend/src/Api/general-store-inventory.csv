@@ -1,0 +1,31 @@
+name,sku,quantity,price,category
+Aashirvaad Atta 5kg,GS001,40,320,Grocery
+Tata Salt 1kg,GS002,60,28,Grocery
+Fortune Sunflower Oil 1L,GS003,50,140,Grocery
+Maggi Noodles Pack,GS004,100,14,Snacks
+Parle-G Biscuits,GS005,120,10,Snacks
+Good Day Biscuits,GS006,80,30,Snacks
+Amul Milk 1L,GS007,70,60,Dairy
+Amul Butter 500g,GS008,45,275,Dairy
+Egg Tray (30 pcs),GS009,25,210,Dairy
+Sugar 1kg,GS010,55,45,Grocery
+Toor Dal 1kg,GS011,35,160,Pulses
+Basmati Rice 5kg,GS012,30,520,Grocery
+Colgate Toothpaste,GS013,65,120,Personal Care
+Lux Soap Pack,GS014,75,150,Personal Care
+Clinic Plus Shampoo,GS015,50,185,Personal Care
+Surf Excel 1kg,GS016,40,220,Household
+Dettol Liquid 500ml,GS017,35,195,Household
+Harpic Toilet Cleaner,GS018,30,110,Household
+Bread Loaf,GS019,60,40,Bakery
+Britannia Cake Roll,GS020,45,35,Bakery
+Lays Chips,GS021,90,20,Snacks
+Coca Cola 1.25L,GS022,55,70,Beverages
+Pepsi 500ml,GS023,65,40,Beverages
+Bisleri Water 1L,GS024,100,20,Beverages
+Tea Powder 500g,GS025,50,210,Beverages
+Nescafe Coffee 100g,GS026,35,320,Beverages
+Onions 1kg,GS027,80,30,Vegetables
+Potatoes 1kg,GS028,90,25,Vegetables
+Tomatoes 1kg,GS029,70,28,Vegetables
+Green Chilli 250g,GS030,40,20,Vegetables
