@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import DashboardNavbar from "../../components/DashboardNavbar";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import DashboardNavbar from "../../components/DashboardNavbar"; 
 import StockTable from "../../components/StockTable";
 import Alerts from "../../components/Alerts";
 import "../../App.css";
 
-import { useNavigate } from "react-router-dom";
-
-const StaffDashboard = () => {
+const StaffDashboard = ({ toggleTheme }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
-
+    <>
+      <DashboardNavbar toggleTheme={toggleTheme} />
+      <div className="container">
       {/* Morning Moves */}
       <div className="card">
         <h3>Morning Moves (Expiring in 48h)</h3>
@@ -57,7 +57,7 @@ const StaffDashboard = () => {
         <div style={{ marginTop: "20px" }}>
           <button
             className="approve-btn"
-            onClick={() => navigate("/staff/orders")}
+            onClick={() => navigate("/staff/StaffOrders")}
           >
             Start Physical Audit
           </button>
@@ -69,13 +69,14 @@ const StaffDashboard = () => {
         <h3>End of Shift</h3>
         <button
           className="approve-btn"
-          onClick={() => navigate("/staff/reports")}
+          onClick={() => navigate("/staff/StaffReports")}
         >
           Generate Receipt
         </button>
       </div>
 
     </div>
+  </>
   );
 };
 

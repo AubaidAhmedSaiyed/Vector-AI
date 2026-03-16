@@ -13,8 +13,6 @@ import {
   Boxes,
   BarChart3,
   LayoutDashboard,
-  ArrowRight,
-  Play
 } from "lucide-react";
 
 function Landing({ toggleTheme, theme }) {
@@ -46,7 +44,7 @@ function Landing({ toggleTheme, theme }) {
 
       {/* ================= HERO ================= */}
       <section className="flickr-landing">
-        <div className="flickr-content fade-in">
+        <div className="flickr-content">
           <span className="hero-badge">{TAGLINE}</span>
 
           <h1 className="flickr-title">
@@ -65,26 +63,26 @@ function Landing({ toggleTheme, theme }) {
 
           <div className="landing-cta">
             <button className="cta-primary" onClick={() => navigate("/login")}>
-              Get Started <ArrowRight size={18} />
+              Get Started
             </button>
             <button
               className="cta-secondary"
               onClick={() => navigate("/signup")}
             >
-              <Play size={18} /> View Demo
+              View Demo
             </button>
           </div>
 
           <div className="hero-trust">
-            <div className="trust-card delay-1">
+            <div className="trust-card">
               <strong className="numeric">~30%</strong>
               <span>Faster Billing</span>
             </div>
-            <div className="trust-card delay-2">
+            <div className="trust-card">
               <strong className="numeric">~25%</strong>
               <span>Fewer Errors</span>
             </div>
-            <div className="trust-card delay-3">
+            <div className="trust-card">
               <strong className="numeric">2×</strong>
               <span>Sales Visibility</span>
             </div>
@@ -93,49 +91,41 @@ function Landing({ toggleTheme, theme }) {
       </section>
 
       {/* ================= FEATURES ================= */}
-      <section className="section fade-in">
+      <section className="section">
         <h2 className="section-title">Key Features</h2>
 
         <div className="card-grid">
-          <div className="info-card delay-1">
-            <div className="feature-icon">
-              <TrendingUp size={26} />
-            </div>
+          <div className="info-card">
+            <TrendingUp size={26} className="feature-icon" />
             <h3>AI Demand Forecasting</h3>
-            <p>Predict demand & avoid stockouts with high-precision AI models.</p>
+            <p>Predict demand & avoid stockouts.</p>
           </div>
 
-          <div className="info-card delay-2">
-            <div className="feature-icon">
-              <Boxes size={26} />
-            </div>
+          <div className="info-card">
+            <Boxes size={26} className="feature-icon" />
             <h3>Smart Inventory</h3>
-            <p>Real-time stock insights & automated low-stock alerts.</p>
+            <p>Real-time stock insights & alerts.</p>
           </div>
 
-          <div className="info-card delay-3">
-            <div className="feature-icon">
-              <BarChart3 size={26} />
-            </div>
+          <div className="info-card">
+            <BarChart3 size={26} className="feature-icon" />
             <h3>Sales Analytics</h3>
-            <p>Turn complex sales data into actionable business decisions.</p>
+            <p>Turn sales data into decisions.</p>
           </div>
 
-          <div className="info-card delay-1">
-            <div className="feature-icon">
-              <LayoutDashboard size={26} />
-            </div>
+          <div className="info-card">
+            <LayoutDashboard size={26} className="feature-icon" />
             <h3>Unified Dashboard</h3>
-            <p>Monitor your entire retail operation from a single interface.</p>
+            <p>Everything in one place.</p>
           </div>
         </div>
       </section>
 
       {/* ================= PRODUCT SHOWCASE ================= */}
-      <section className="section product-showcase fade-in">
+      <section className="section product-showcase">
         <div className="showcase-grid">
           <div className="showcase-left">
-            <h2 className="section-title" style={{ textAlign: 'left', left: '0', transform: 'none' }}>
+            <h2 className="section-title">
               Decisions powered by real retail data
             </h2>
 
@@ -153,11 +143,11 @@ function Landing({ toggleTheme, theme }) {
 
             <div className="showcase-stats">
               <div className="stat-card">
-                <strong className="numeric" style={{ fontSize: '2.5rem', display: 'block', background: 'var(--primary-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>~40%</strong>
+                <strong className="numeric">~40%</strong>
                 <span>Faster Inventory Movement</span>
               </div>
               <div className="stat-card">
-                <strong className="numeric" style={{ fontSize: '2.5rem', display: 'block', background: 'var(--primary-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>~18%</strong>
+                <strong className="numeric">~18%</strong>
                 <span>Revenue Growth</span>
               </div>
             </div>
@@ -216,79 +206,74 @@ function Landing({ toggleTheme, theme }) {
       </section>
 
       {/* ================= USERS ================= */}
-      <section className="section fade-in">
+      <section className="section">
         <h2 className="section-title">Who Is It For?</h2>
 
         <div className="card-grid">
-          <div className="info-card delay-1">
+          <div className="info-card">
             <h3>Shop Owners</h3>
-            <p>Complete visibility over sales & stock performance across all your business locations.</p>
+            <p>Complete visibility over sales & stock.</p>
           </div>
 
-          <div className="info-card delay-2">
+          <div className="info-card">
             <h3>Store Staff</h3>
-            <p>Faster billing with fewer mistakes and instant inventory lookups at your fingertips.</p>
+            <p>Faster billing with fewer mistakes.</p>
           </div>
 
-          <div className="info-card delay-3">
+          <div className="info-card">
             <h3>Managers</h3>
-            <p>Real-time performance tracking and automated reports for data-driven management.</p>
+            <p>Real-time performance tracking.</p>
           </div>
 
-          <div className="info-card delay-1">
+          <div className="info-card">
             <h3>Business Owners</h3>
-            <p>Enterprise-grade intelligence to scale your business and outpace the competition.</p>
+            <p>Monitor growth across locations.</p>
           </div>
         </div>
       </section>
 
       {/* ================= ABOUT ================= */}
-      <section className="section alt-section fade-in">
+      <section className="section alt-section">
         <h2 className="section-title">About Vector AI</h2>
 
         <div className="card-grid">
-          <div className="info-card delay-1">
+          <div className="info-card">
             <h3>What We Do</h3>
             <p>{BRAND_DESCRIPTION}</p>
           </div>
 
-          <div className="info-card delay-2">
+          <div className="info-card">
             <h3>Why We Exist</h3>
-            <p>To replace guesswork with intelligence, helping small to large retailers thrive.</p>
+            <p>To replace guesswork with intelligence.</p>
           </div>
 
-          <div className="info-card delay-3">
+          <div className="info-card">
             <h3>Our Vision</h3>
-            <p>Making enterprise-grade tools accessible to every retailer world-wide.</p>
+            <p>Enterprise-grade tools for every retailer.</p>
           </div>
 
-          <div className="info-card delay-1">
+          <div className="info-card">
             <h3>How It Works</h3>
-            <p>Connect your sales + inventory data to get real-time insights and automated actions.</p>
+            <p>Sales + Inventory → Insights → Action.</p>
           </div>
         </div>
       </section>
 
       {/* ================= CONTACT ================= */}
-      <section className="section contact-highlight fade-in">
-        <div className="info-card" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 className="section-title" style={{ marginBottom: '30px' }}>Contact Us</h2>
-          <p className="section-text" style={{ marginBottom: '40px' }}>
-            Ready to transform your retail business with AI? Get in touch with our team today.
-          </p>
+      <section className="section contact-highlight">
+        <h2 className="section-title">Contact Us</h2>
 
-          <form className="contact-form">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
-              <input type="text" placeholder="Your Name" style={{ margin: '0' }} />
-              <input type="email" placeholder="Your Email" style={{ margin: '0' }} />
-            </div>
-            <textarea placeholder="Your Message" style={{ width: '100%', marginBottom: '20px', minHeight: '120px' }}></textarea>
-            <button className="cta-primary" style={{ width: '100%', justifyContent: 'center' }} type="submit">Send Message <ArrowRight size={18} /></button>
-          </form>
-        </div>
+        <p className="section-text">
+          Want to explore Vector AI for your business?
+        </p>
+
+        <form className="contact-form">
+          <input type="text" placeholder="Your Name" />
+          <input type="email" placeholder="Your Email" />
+          <textarea placeholder="Your Message"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
       </section>
-
-      {/* ================= FOOTER ================= */}
       <Footer />
     </div>
   );

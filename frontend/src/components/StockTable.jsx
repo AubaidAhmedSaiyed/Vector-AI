@@ -1,12 +1,4 @@
-function StockTable({ stock = [], loading = false, error = "" }) {
-  if (loading) {
-    return <p className="note">Loading inventory...</p>;
-  }
-
-  if (error) {
-    return <p className="note">{error}</p>;
-  }
-
+function StockTable({ stock }) {
   return (
     <>
       <h3>📊 Current Stock</h3>
@@ -19,18 +11,13 @@ function StockTable({ stock = [], loading = false, error = "" }) {
           </tr>
         </thead>
         <tbody>
-          {stock.map((item) => (
-            <tr key={item.id || item.name}>
+          {stock.map((item, index) => (
+            <tr key={index}>
               <td>{item.name}</td>
               <td className="numeric">{item.quantity}</td>
-              <td>{item.expiry || "-"}</td>
+              <td>{item.expiry}</td>
             </tr>
           ))}
-          {stock.length === 0 && (
-            <tr>
-              <td colSpan="3">No inventory items found.</td>
-            </tr>
-          )}
         </tbody>
       </table>
     </>

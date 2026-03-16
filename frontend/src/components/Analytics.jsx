@@ -70,8 +70,8 @@ function Analytics({ stock, theme = "dark" }) {
       {
         label: "Sales (₹)",
         data: salesTrend,
-        borderColor: "#EA580C", // Orange 600
-        backgroundColor: "rgba(234, 88, 12, 0.15)",
+        borderColor: "#06b6d4", // Cyan
+        backgroundColor: "rgba(6,182,212,0.15)",
         borderWidth: 2.5,
         tension: 0.4,
         pointRadius: 0,
@@ -80,8 +80,8 @@ function Analytics({ stock, theme = "dark" }) {
       {
         label: "Profit (₹)",
         data: profitTrend,
-        borderColor: "#6366F1", // Indigo 500
-        backgroundColor: "rgba(99, 102, 241, 0.12)",
+        borderColor: "#10b981", // Emerald
+        backgroundColor: "rgba(16,185,129,0.12)",
         borderWidth: 2.5,
         tension: 0.4,
         pointRadius: 0,
